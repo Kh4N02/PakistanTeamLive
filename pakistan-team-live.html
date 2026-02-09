@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Pakistan Team | T20 World Cup Live</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/controls.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/shaka-player.compiled.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/shaka-player.ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body, html {
+            width: 100%;
+            min-height: 100%;
+            background: #0a0e12;
+            color: #fff;
+            font-family: 'Outfit', 'Segoe UI', system-ui, sans-serif;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        .landing-page {
+            display: block;
+            width: 100%;
+            min-height: 100vh;
+        }
+        
+        .landing-page.hidden {
+            display: none;
+        }
+
+        /* ----- Header ----- */
+        .landing-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            background: rgba(10, 14, 18, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .channel-link {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+        .channel-link:hover {
+            color: #2dd4bf;
+        }
+        .channel-tagline {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* ----- Hero ----- */
+        .hero-section {
+            padding: 48px 24px 40px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, transparent 50%);
+        }
+        .hero-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #2dd4bf;
+            margin-bottom: 12px;
+        }
+        .hero-title {
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 16px;
+            color: #94a3b8;
+            font-weight: 500;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        /* ----- Featured strip (first live match CTA) ----- */
+        .featured-section {
+            padding: 0 24px 32px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .featured-content {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .featured-bg { display: none; }
+        .match-title {
+            font-size: clamp(18px, 2.5vw, 22px);
+            font-weight: 700;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .match-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .live-badge {
+            background: #dc2626;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .match-date, .match-venue {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .match-description {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.45;
+            display: none;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .btn-watch {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            border: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            touch-action: manipulation;
+            font-family: inherit;
+        }
+        .btn-watch:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.35);
+        }
+        .btn-icon {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+        .btn-icon:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        /* ----- Live matches grid (3 cards) ----- */
+        .events-section {
+            padding: 24px 24px 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .section-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        .events-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding-bottom: 8px;
+        }
+        @media (min-width: 900px) {
+            .events-carousel {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .events-carousel {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        .event-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.85) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            touch-action: manipulation;
+            overflow: hidden;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+        }
+        .event-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(45, 212, 191, 0.3);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+        .event-card.live {
+            border-color: rgba(220, 38, 38, 0.35);
+        }
+        .event-card.live:hover {
+            border-color: rgba(220, 38, 38, 0.5);
+        }
+        .event-card.has-image {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 200px;
+        }
+        .event-card.has-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.85) 100%);
+            z-index: 1;
+        }
+        .event-card-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .event-status {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #94a3b8;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 3;
+        }
+        .event-status.live {
+            background: #dc2626;
+            color: #fff;
+        }
+        .event-flags {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .event-card.has-image .event-flags {
+            display: none;
+        }
+        .flag {
+            width: 36px;
+            height: 26px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .event-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #fff;
+            line-height: 1.3;
+        }
+        .event-card.has-image .event-title {
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+        .event-time {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .event-card.has-image .event-time {
+            color: #cbd5e1;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+        }
+        .event-prime-logo {
+            margin-top: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            z-index: 3;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .event-prime-logo:hover {
+            color: #2dd4bf;
+        }
+
+        .player-page {
+            display: none;
+            width: 100%;
+            height: 100vh;
+          height: 100dvh;
+            flex-direction: column;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1000;
+        }
+        
+        .player-page.active {
+            display: flex;
+        }
+
+        .main-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          z-index: 1001;
+            flex-wrap: wrap;
+            gap: 10px;
+            flex-shrink: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .home-btn-header {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+          touch-action: manipulation;
+        }
+
+        .home-btn-header:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .match-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+        }
+
+        .match-title-header {
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .match-subtitle {
+            font-size: clamp(13px, 1.8vw, 16px);
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #ff4d4d;
+            font-weight: 600;
+            font-size: 11px;
+            padding: 2px 8px;
+            background: rgba(255, 77, 77, 0.1);
+            border-radius: 12px;
+        }
+
+        .live-pulse {
+            width: 6px;
+            height: 6px;
+            background: #ff4d4d;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            min-width: 140px;
+            max-width: 100%;
+            flex-shrink: 1;
+            text-decoration: none;
+            color: inherit;
+        }
+        .user-info:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        .viewer-count-player {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: #fff !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            margin-left: 8px;
+            padding-left: 8px;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            white-space: nowrap;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .viewer-count-player i {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .viewer-count-player {
+                font-size: 11px !important;
+                margin-left: 6px !important;
+                padding-left: 6px !important;
+                gap: 3px !important;
+                display: inline-flex !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            
+            .viewer-count-player i {
+                font-size: 10px;
+            }
+            
+            .user-info {
+                flex-wrap: nowrap;
+                overflow: visible;
+            }
+        }
+
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            background: #0088cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .video-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          width: 100%;
+          height: 100%;
+          touch-action: none;
+          min-height: 0;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            display: block;
+          touch-action: none;
+        }
+
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+        
+        video::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+        
+        video::-webkit-media-controls-panel {
+            display: none !important;
+        }
+
+      /* Shaka Player Controls - Keep Original Layout */
+        .shaka-video-container {
+            width: 100% !important;
+            height: 100% !important;
+            position: relative !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+      }
+
+      /* Ensure controls container is visible and properly positioned */
+      .shaka-controls-container {
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+          z-index: 1002 !important;
+            display: flex !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          pointer-events: auto !important;
+      }
+
+      /* Make all control buttons touchable */
+      .shaka-controls-button {
+          touch-action: manipulation !important;
+          -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3) !important;
+          cursor: pointer !important;
+      }
+
+      /* Custom Quality Selector Styles */
+      .custom-quality-button {
+          position: relative;
+      }
+
+      .custom-quality-menu {
+          position: absolute;
+          bottom: 50px;
+          right: 10px;
+          background: rgba(0, 0, 0, 0.95);
+          border-radius: 4px;
+          padding: 8px 0;
+          min-width: 220px;
+          z-index: 1003;
+          max-height: 350px;
+          overflow-y: auto;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
+
+      .custom-quality-menu-item {
+          padding: 10px 16px;
+          cursor: pointer;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 14px;
+          transition: background 0.2s;
+      }
+
+      .custom-quality-menu-item:hover {
+          background: rgba(255, 255, 255, 0.15);
+      }
+
+      .custom-quality-menu-item span {
+          margin-left: 8px;
+          color: #00a8e1;
+          font-weight: bold;
+      }
+
+      /* Live / CC / Popout buttons */
+      .player-custom-left {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          margin-right: 8px;
+      }
+      .player-custom-left.hidden {
+          display: none !important;
+      }
+      .custom-live-btn {
+          background: rgba(255, 255, 255, 0.15);
+          border: none;
+          color: #fff;
+          min-width: 36px;
+          min-height: 36px;
+          border-radius: 4px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s;
+          touch-action: manipulation;
+          font-size: 14px;
+      }
+      .custom-live-btn:hover {
+          background: rgba(255, 255, 255, 0.25);
+      }
+      .custom-live-btn {
+          color: #e50914;
+          font-weight: 600;
+      }
+
+
+      @media (max-width: 768px) {
+          .custom-quality-menu {
+              bottom: 60px;
+              right: 5px;
+              min-width: 200px;
+              max-height: 300px;
+          }
+
+          .custom-quality-menu-item {
+              padding: 12px 16px;
+              font-size: 16px;
+          }
+      }
+
+      /* Ensure progress bar is touchable */
+      .shaka-seek-bar-container,
+      .shaka-volume-bar-container {
+          touch-action: pan-x !important;
+        }
+
+        @media (max-width: 768px) {
+            .landing-header {
+                padding: 12px 16px;
+            }
+            .channel-link {
+                font-size: 16px;
+            }
+            .hero-section {
+                padding: 32px 16px 28px;
+            }
+            .hero-title {
+                font-size: 26px;
+            }
+            .featured-section {
+                padding: 0 16px 24px;
+            }
+            .featured-content {
+                padding: 16px 18px;
+            }
+            .events-section {
+                padding: 20px 16px 40px;
+            }
+            .section-title {
+                font-size: 18px;
+            }
+            .event-card {
+                padding: 16px;
+                min-height: 140px;
+            }
+
+            .header {
+                padding: 8px 12px;
+                flex-direction: row;
+                align-items: center;
+                gap: 8px;
+                flex-wrap: nowrap;
+                overflow: hidden;
+            }
+
+            .header-left {
+                flex-direction: row;
+                gap: 10px;
+                flex: 1;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            .match-info {
+                min-width: 0;
+                flex: 1;
+                overflow: hidden;
+            }
+            
+            .match-title-header {
+                font-size: 14px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .user-info {
+                align-self: center;
+                min-width: auto;
+                max-width: 100%;
+                padding: 4px 8px;
+                gap: 4px;
+                flex-shrink: 1;
+                overflow: visible;
+            }
+            
+            .user-avatar {
+                width: 24px;
+                height: 24px;
+                flex-shrink: 0;
+            }
+            
+            .user-name {
+                font-size: 11px;
+                white-space: nowrap;
+                flex-shrink: 1;
+                min-width: 0;
+            }
+            
+            .viewer-count-player {
+                font-size: 9px !important;
+                margin-left: 4px !important;
+                padding-left: 4px !important;
+                gap: 2px !important;
+                display: inline-flex !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                flex-shrink: 0;
+                border-left: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            .viewer-count-player i {
+                font-size: 8px;
+            }
+            
+            .viewer-count-player span {
+                font-size: 9px;
+            }
+
+          /* Mobile: Slim control bar like desktop */
+          .shaka-controls-container {
+              display: flex !important;
+              opacity: 1 !important;
+              visibility: visible !important;
+              pointer-events: auto !important;
+              padding: 4px 8px !important;
+              min-height: auto !important;
+              height: auto !important;
+          }
+
+          /* Slim buttons on mobile */
+          .shaka-controls-button {
+              min-width: 36px !important;
+              min-height: 36px !important;
+              padding: 6px !important;
+              font-size: 16px !important;
+          }
+
+          /* Slim progress bar */
+          .shaka-seek-bar-container,
+          .shaka-volume-bar-container {
+              height: 32px !important;
+              padding: 4px 0 !important;
+              min-height: 32px !important;
+          }
+
+          .shaka-range-container {
+              height: 3px !important;
+          }
+
+          .shaka-range-container input[type="range"] {
+              height: 3px !important;
+              -webkit-appearance: none !important;
+              appearance: none !important;
+          }
+
+          .shaka-range-container input[type="range"]::-webkit-slider-thumb {
+              width: 14px !important;
+              height: 14px !important;
+              -webkit-appearance: none !important;
+              appearance: none !important;
+              background: #fff !important;
+              border-radius: 50% !important;
+              cursor: pointer !important;
+              margin-top: -5.5px !important;
+          }
+
+          .shaka-range-container input[type="range"]::-moz-range-thumb {
+              width: 14px !important;
+              height: 14px !important;
+              background: #fff !important;
+              border-radius: 50% !important;
+              cursor: pointer !important;
+              border: none !important;
+          }
+
+          /* Fix video container centering in landscape */
+          .video-container {
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              min-height: 0 !important;
+          }
+
+          .shaka-video-container {
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              height: 100% !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 24px 12px 20px;
+            }
+            .featured-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .action-buttons {
+                width: 100%;
+            }
+            .btn-watch {
+                flex: 1;
+            }
+        }
+
+      /* Landscape mode fixes */
+      @media (max-width: 768px) and (orientation: landscape) {
+          .player-page {
+              height: 100vh;
+              height: 100dvh;
+          }
+
+          .main-container {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+          }
+
+          .header {
+              padding: 8px 15px;
+              flex-shrink: 0;
+          }
+
+          .video-container {
+              flex: 1;
+              min-height: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+          }
+
+          .shaka-video-container {
+              width: 100% !important;
+              height: 100% !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+          }
+
+          video {
+              max-width: 100%;
+              max-height: 100%;
+              object-fit: contain;
+          }
+
+          /* Ensure controls are at bottom and visible */
+          .shaka-controls-container {
+              position: absolute !important;
+              bottom: 0 !important;
+              left: 0 !important;
+              right: 0 !important;
+              padding: 4px 8px !important;
+          }
+      }
+
+      /* Portrait mode fixes - ensure controls are always visible */
+      @media (max-width: 768px) and (orientation: portrait) {
+          .player-page {
+              height: 100vh;
+              height: 100dvh;
+          }
+
+          .main-container {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              overflow: hidden;
+          }
+
+          .header {
+              padding: 10px 15px;
+              flex-shrink: 0;
+              max-height: 80px;
+          }
+
+          .video-container {
+              flex: 1;
+              min-height: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+              overflow: hidden;
+          }
+
+          .shaka-video-container {
+              width: 100% !important;
+              height: 100% !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              position: relative !important;
+          }
+
+          video {
+              max-width: 100%;
+              max-height: 100%;
+              object-fit: contain;
+          }
+
+          /* Ensure controls are always visible at bottom in portrait */
+          .shaka-controls-container {
+              position: absolute !important;
+              bottom: 0 !important;
+              left: 0 !important;
+              right: 0 !important;
+              padding: 4px 8px !important;
+              display: flex !important;
+              opacity: 1 !important;
+              visibility: visible !important;
+              z-index: 1002 !important;
+              background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%) !important;
+          }
+
+          /* Make sure controls don't get cut off */
+          .shaka-controls-button-panel {
+              display: flex !important;
+              align-items: center !important;
+              flex-wrap: nowrap !important;
+          }
+      }
+
+      /* Telegram Join popup - shown before opening player */
+      #tgPopup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.85);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      }
+      #tgPopup.show {
+        display: flex;
+      }
+      .tg-card {
+        background: #fff;
+        padding: 25px 22px;
+        border-radius: 14px;
+        width: 300px;
+        max-width: calc(100vw - 32px);
+        text-align: center;
+      }
+      .tg-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 18px;
+        color: #0088cc;
+      }
+      .tg-card button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .tg-join {
+        background: #0088cc;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+      .tg-join:hover { background: #007ab8; }
+      .tg-joined {
+        background: #e0e0e0;
+        color: #000;
+      }
+      .tg-joined:hover { background: #d0d0d0; }
+  </style>
+</head>
+<body>
+    <!-- Telegram join popup - shown when user clicks to watch live -->
+    <div id="tgPopup">
+      <div class="tg-card">
+        <div class="tg-title">Join Telegram</div>
+        <button type="button" class="tg-join" id="tgJoinBtn">Join</button>
+        <button type="button" class="tg-joined" id="tgAlreadyJoinedBtn">Already Joined</button>
+      </div>
+    </div>
+    <div class="landing-page" id="landingPage">
+        <header class="landing-header">
+            <a href="https://t.me/PakistanTeam" target="_blank" rel="noopener" class="channel-link">
+                <i class="fab fa-telegram"></i> Pakistan Team
+            </a>
+            <span class="channel-tagline">t.me/PakistanTeam</span>
+        </header>
+        <section class="hero-section">
+            <p class="hero-badge">ICC 2026</p>
+            <h1 class="hero-title">T20 World Cup — Live</h1>
+            <p class="hero-subtitle">Choose a match below to start watching. Streams update daily.</p>
+        </section>
+        <div class="featured-section">
+            <div class="featured-content">
+                <div>
+                    <h2 class="match-title" id="featuredTitle">Sri Lanka vs. Ireland</h2>
+                    <div class="match-meta">
+                        <span class="live-badge" id="featuredBadge">LIVE</span>
+                        <span class="match-date" id="featuredDate">7 Feb 2026</span>
+                        <span class="match-venue" id="featuredVenue">TBC</span>
+                    </div>
+                    <p class="match-description" id="featuredDescription" aria-hidden="true">Watch live.</p>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-watch" id="watchLiveBtn">
+                        <i class="fas fa-play"></i>
+                        Watch live
+                    </button>
+                    <button class="btn-icon" id="shareBtn" title="Copy link">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <section class="events-section">
+            <h2 class="section-title">Live now</h2>
+            <p class="section-subtitle">Tap a match to watch — up to 3 streams available</p>
+            <div class="events-carousel" id="eventsCarousel"></div>
+        </section>
+    </div>
+
+    <div class="player-page" id="playerPage">
+        <div class="main-container">
+            <div class="header">
+                <div class="header-left">
+                    <button class="home-btn-header" id="homeBtnHeader" title="Home">
+                        <i class="fas fa-home"></i>
+                    </button>
+                    
+                    <div class="match-info">
+                        <div class="match-title-header" id="currentMatchTitle">Select a Match</div>
+                        <div class="match-subtitle">
+                            <span class="live-indicator">
+                                <span class="live-pulse"></span>
+                                LIVE
+                            </span>
+                            <span id="currentTournament">ICC Men's T20 World Cup 2026</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="https://t.me/PakistanTeam" target="_blank" rel="noopener" class="user-info">
+                    <div class="user-avatar"><i class="fab fa-telegram"></i></div>
+                    <div class="user-name">Pakistan Team</div>
+                </a>
+            </div>
+            
+            <div class="video-container" id="videoContainer">
+                <video id="video" autoplay playsinline webkit-playsinline crossorigin="anonymous"></video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      (function(){var _='==QX9xGb15mOiQ3clZWauFWbiwSXio6hfCvrH+J8iwiIwe4nwH7hfCvIbpjIzdWYsZmIsICMwgTP39TZ3kTZzMGZyMTZ5ETL2QzMzETO3QzNwQTNx0yb09Gaw9SbvNmLoNXYsB3cuVnLzV2Zh1Wav8iOzBHd0hmI6ISZnFWbpJCLi4SZtlmcQBibvBSZ2lGbgQmbhxWZylEIu9GIltWY0BSYr5WYMBSayNFIoNGdhdlI6IibvlGdwlmcjNXZkJCLiYjMwIDIwV3QgQGby92VgAjMUBycn4WZNByQDlkI6ICduVWbh5mc19GdiwiIlZXasJiOiMXd0FGdzJCLiMkQUJiOiUWduVmdiwiI2IDMyAiYlZEI5IiOiUGdhRmIsICZuFGblJXSgMndgE2auFGTgkmcTJiOiUGb0lGdisHL9xGb15mOiQ3clZWauFWbiwSXiA7hfCfsH+J8iwiIwe4nwX7hfCvIbpjIzdWYsZmIsICMwgTP39TOkBTY4ImMkJjYzcTL2kzN0MDM2kTM3EjNx0yb09Gaw9SbvNmLoNXYsB3cuVnLzV2Zh1Wav8iOzBHd0hmI6ISZnFWbpJCLi4SZtlmcQBibvBSZ2lGbgE2auFGTgkmcTBibvBSZrFGdg4WY0NXarFGUgg2Y0F2ViojIu9Wa0BXayN2clRmIsIiNyAjMgAXdDBCZsJ3bXBCMyQFIzdibl1EIDNUSiojI05WZtFmbyV3b0JCLiUmdpxmI6Iyc1RXY0NnIsIyQCRlI6ISZ15WZ2JCLiYjMwIDIiVmRggjI6ISZ0FGZiwiIhtmbhxEIpJ3UgMndg4WY0NXarFGUiojIlxGdpRnI7xSfsxWdupjI0NXZmlmbh1mIs0lI4e4nwr7hfCvIsIysH+J8ue4nwLyW6IycnFGbmJCLiADM40zd/EGZ1cTNiFTYiZzMw0CO2kDN3ATNxQTMzUTMt8GdvhGcv02bj5CazFGbwNnb15ycldWYtl2LvozcwRHdoJiOiU2Zh1WaiwiIuUWbpJHUg42bgUmdpxGIzVGdhR3UgQWZ0lmbVBibvBSZrFGdgEWak5WSgg2Y0F2ViojIu9Wa0BXayN2clRmIsIiNyAjMgAXdDBCZsJ3bXBCMyQFIzdibl1EIDNUSiojI05WZtFmbyV3b0JCLiUmdpxmI6Iyc1RXY0NnIsIyQCRlI6ISZ15WZ2JCLiYjMwIDIiVmRgcjI6ISZ0FGZiwiIzVGdhR3UgQWZ0lmbVByc2BSYpRmbJJiOiUGb0lGdis3W';try{window._s=JSON.parse(atob(_.split('').reverse().join('')));}catch(e){window._s=[];}
+      })();
+      const streams = window._s;
+
+        let player = null;
+        let ui = null;
+        let currentStream = null;
+        let playerInitialized = false;
+
+        const landingPage = document.getElementById('landingPage');
+        const playerPage = document.getElementById('playerPage');
+        const watchLiveBtn = document.getElementById('watchLiveBtn');
+        const tgPopup = document.getElementById('tgPopup');
+        const tgJoinBtn = document.getElementById('tgJoinBtn');
+        const tgAlreadyJoinedBtn = document.getElementById('tgAlreadyJoinedBtn');
+        const eventsCarousel = document.getElementById('eventsCarousel');
+        const homeBtnHeader = document.getElementById('homeBtnHeader');
+        const video = document.getElementById('video');
+      const videoContainer = document.getElementById('videoContainer');
+        const currentMatchTitle = document.getElementById('currentMatchTitle');
+        const currentTournament = document.getElementById('currentTournament');
+        const featuredTitle = document.getElementById('featuredTitle');
+        
+        const TG_LINK = 'https://t.me/PakistanTeam';
+        let pendingStreamAfterTg = null;
+        
+        function showTgPopupThenPlay(stream) {
+            if (!stream || !stream.manifest) return;
+            pendingStreamAfterTg = stream;
+            if (tgPopup) tgPopup.classList.add('show');
+        }
+        function closeTgPopup() {
+            if (tgPopup) tgPopup.classList.remove('show');
+        }
+        function runPendingStreamAfterTg() {
+            if (pendingStreamAfterTg) {
+                const s = pendingStreamAfterTg;
+                pendingStreamAfterTg = null;
+                showPlayerPage().then(() => loadStream(s));
+            }
+        }
+        
+        if (tgJoinBtn) {
+            tgJoinBtn.addEventListener('click', () => {
+                window.open(TG_LINK, '_blank', 'noopener');
+            });
+        }
+        if (tgAlreadyJoinedBtn) {
+            tgAlreadyJoinedBtn.addEventListener('click', () => {
+                closeTgPopup();
+                runPendingStreamAfterTg();
+            });
+        }
+        
+        const featuredDate = document.getElementById('featuredDate');
+        const featuredVenue = document.getElementById('featuredVenue');
+        const featuredDescription = document.getElementById('featuredDescription');
+        const featuredBadge = document.getElementById('featuredBadge');
+
+      /**
+       * Get resolution name (FHD, HD, SD, etc.)
+       */
+      function getResolutionName(height) {
+        if (!height) return '';
+        if (height >= 2160) return '4K';
+        if (height >= 1080) return 'FHD';
+        if (height >= 720) return 'HD';
+        if (height >= 480) return 'SD';
+        return height + 'p';
+      }
+
+      /**
+       * Format quality label with resolution, bitrate (kbps), and fps
+       * e.g. "1080p FHD (9000k, 50fps)", "720p HD (4500k, 25fps)"
+       */
+      function formatQualityLabel(height, bandwidth, frameRate) {
+        if (!height) return 'Unknown';
+        const resName = getResolutionName(height);
+        const resLabel = resName ? `${height}p ${resName}` : `${height}p`;
+        if (bandwidth != null && frameRate != null && (bandwidth > 0 || frameRate > 0)) {
+          const kbps = bandwidth > 0 ? Math.round(bandwidth / 1000) + 'k' : '';
+          const fps = frameRate > 0 ? Math.round(frameRate) + 'fps' : '';
+          const extra = [kbps, fps].filter(Boolean).join(', ');
+          return extra ? `${resLabel} (${extra})` : resLabel;
+        }
+        return resLabel;
+      }
+
+      /**
+       * Extract available qualities from MPD manifest (each variant = unique option)
+       * Returns array with full labels: "1080p FHD (9000k, 50fps)", etc.
+       */
+      function extractQualitiesFromMPD(player) {
+        try {
+          const variants = player.getVariants();
+          const qualities = [];
+          
+          variants.forEach(variant => {
+            if (variant.video) {
+              const height = variant.video.height;
+              const frameRate = variant.video.frameRate || 0;
+              const bandwidth = variant.bandwidth || 0;
+              
+              if (height) {
+                const label = formatQualityLabel(height, bandwidth, frameRate);
+                qualities.push({
+                  label: label,
+                  height: height,
+                  frameRate: frameRate,
+                  bandwidth: bandwidth,
+                  variant: variant
+                });
+              }
+            }
+          });
+          
+          // Sort by resolution (highest first), then by bitrate
+          qualities.sort((a, b) => {
+            if (b.height !== a.height) return b.height - a.height;
+            return (b.bandwidth || 0) - (a.bandwidth || 0);
+          });
+          
+          return qualities;
+        } catch (error) {
+          console.error('Error extracting qualities from MPD:', error);
+          return [];
+        }
+      }
+
+
+      /**
+       * Create custom quality selector that replaces Shaka's default
+       */
+      function createCustomQualitySelector(qualities) {
+        if (!qualities || qualities.length === 0) return;
+        
+        try {
+          // Store qualities globally
+          window.availableQualities = qualities;
+          
+          // Remove existing custom selector if any
+          const existingCustomBtn = videoContainer.querySelector('.custom-quality-button');
+          const existingCustomMenu = videoContainer.querySelector('.custom-quality-menu');
+          if (existingCustomBtn) existingCustomBtn.remove();
+          if (existingCustomMenu) existingCustomMenu.remove();
+          
+          // Find Shaka's quality button - wait for it to be created with multiple attempts
+          let attempts = 0;
+          const maxAttempts = 20; // Try for up to 6 seconds
+          
+          const findQualityButton = () => {
+            attempts++;
+            const qualityButton = videoContainer.querySelector('.shaka-quality-menu-button') ||
+                                  videoContainer.querySelector('[aria-label*="quality" i]') ||
+                                  videoContainer.querySelector('[aria-label*="Quality" i]');
+            
+            if (!qualityButton) {
+              if (attempts < maxAttempts) {
+                // Try again later
+                setTimeout(findQualityButton, 300);
+                return;
+              } else {
+                console.warn('Quality button not found after multiple attempts, creating custom button anyway');
+                // Create button in controls container directly
+                const controlsContainer = videoContainer.querySelector('.shaka-controls-button-panel') ||
+                                         videoContainer.querySelector('.shaka-controls-container');
+                if (controlsContainer) {
+                  createCustomQualityButtonDirectly(controlsContainer, qualities);
+                  return;
+                }
+              }
+            }
+            
+            // Hide Shaka's default quality button
+            if (qualityButton) {
+              qualityButton.style.display = 'none';
+              qualityButton.style.visibility = 'hidden';
+            }
+            
+            // Create our custom quality button
+            const customQualityBtn = document.createElement('button');
+            customQualityBtn.className = 'custom-quality-button shaka-controls-button';
+            customQualityBtn.setAttribute('aria-label', 'Quality');
+            customQualityBtn.innerHTML = '<span class="shaka-quality-menu-button-icon" aria-hidden="true">HD</span>';
+            customQualityBtn.style.display = 'flex';
+            customQualityBtn.style.alignItems = 'center';
+            customQualityBtn.style.justifyContent = 'center';
+            customQualityBtn.style.minWidth = '44px';
+            customQualityBtn.style.minHeight = '44px';
+            
+            // Insert after Shaka's quality button or at end of controls
+            if (qualityButton && qualityButton.parentNode) {
+              qualityButton.parentNode.insertBefore(customQualityBtn, qualityButton.nextSibling);
+            } else {
+              const controlsContainer = videoContainer.querySelector('.shaka-controls-button-panel');
+              if (controlsContainer) {
+                controlsContainer.appendChild(customQualityBtn);
+              }
+            }
+            
+            // Create custom quality menu
+            createCustomQualityMenu(customQualityBtn, qualities);
+          };
+          
+          findQualityButton();
+          
+          // Also try a direct approach after a delay
+          setTimeout(() => {
+            const existingCustom = videoContainer.querySelector('.custom-quality-button');
+            if (!existingCustom) {
+              const controlsContainer = videoContainer.querySelector('.shaka-controls-button-panel') ||
+                                       videoContainer.querySelector('.shaka-controls-container');
+              if (controlsContainer) {
+                createCustomQualityButtonDirectly(controlsContainer, qualities);
+              }
+            }
+          }, 2000);
+          
+        } catch (error) {
+          console.error('Error creating custom quality selector:', error);
+        }
+      }
+      
+      /**
+       * Create custom quality button directly in controls container
+       */
+      function createCustomQualityButtonDirectly(controlsContainer, qualities) {
+        // Remove existing if any
+        const existing = videoContainer.querySelector('.custom-quality-button');
+        if (existing) existing.remove();
+        
+        // Hide all Shaka quality buttons
+        const shakaQualityButtons = videoContainer.querySelectorAll('.shaka-quality-menu-button, [aria-label*="quality" i], [aria-label*="Quality" i]');
+        shakaQualityButtons.forEach(btn => {
+          btn.style.display = 'none';
+          btn.style.visibility = 'hidden';
+        });
+        
+        // Create custom button
+        const customQualityBtn = document.createElement('button');
+        customQualityBtn.className = 'custom-quality-button shaka-controls-button';
+        customQualityBtn.setAttribute('aria-label', 'Quality');
+        customQualityBtn.innerHTML = '<span class="shaka-quality-menu-button-icon" aria-hidden="true">HD</span>';
+        customQualityBtn.style.display = 'flex';
+        customQualityBtn.style.alignItems = 'center';
+        customQualityBtn.style.justifyContent = 'center';
+        customQualityBtn.style.minWidth = '44px';
+        customQualityBtn.style.minHeight = '44px';
+        
+        // Find overflow menu button to insert before it, or append to end
+        const overflowBtn = controlsContainer.querySelector('.shaka-overflow-menu-button');
+        if (overflowBtn) {
+          controlsContainer.insertBefore(customQualityBtn, overflowBtn);
+        } else {
+          controlsContainer.appendChild(customQualityBtn);
+        }
+        
+        // Create menu
+        createCustomQualityMenu(customQualityBtn, qualities);
+      }
+      
+      /**
+       * Create custom quality menu
+       */
+      function createCustomQualityMenu(customQualityBtn, qualities) {
+        // Create custom quality menu
+        const customQualityMenu = document.createElement('div');
+        customQualityMenu.className = 'custom-quality-menu';
+        customQualityMenu.style.display = 'none';
+        videoContainer.appendChild(customQualityMenu);
+          
+        // Populate menu with our custom labels
+        customQualityMenu.innerHTML = '';
+          
+          // Add "Auto" option
+          const autoItem = document.createElement('div');
+          autoItem.className = 'custom-quality-menu-item';
+          autoItem.innerHTML = 'Auto<span style="display:none; margin-left:8px; color:#00a8e1; font-weight:bold;">✓</span>';
+          autoItem.style.padding = '8px 16px';
+          autoItem.style.cursor = 'pointer';
+          autoItem.style.color = '#fff';
+          autoItem.style.display = 'flex';
+          autoItem.style.alignItems = 'center';
+          autoItem.style.justifyContent = 'space-between';
+          
+          const autoCheckmark = autoItem.querySelector('span');
+          
+          autoItem.addEventListener('click', () => {
+            try {
+              player.configure({ abr: { enabled: true } });
+              customQualityMenu.style.display = 'none';
+              updateCustomQualityButtonLabel('Auto');
+              
+              // Update checkmarks
+              customQualityMenu.querySelectorAll('.custom-quality-menu-item').forEach(item => {
+                const check = item.querySelector('span');
+                if (check) check.style.display = 'none';
+              });
+              autoCheckmark.style.display = 'inline';
+            } catch (e) {
+              console.error('Error setting auto quality:', e);
+            }
+          });
+          
+          autoItem.addEventListener('mouseenter', () => {
+            autoItem.style.background = 'rgba(255, 255, 255, 0.1)';
+          });
+          autoItem.addEventListener('mouseleave', () => {
+            autoItem.style.background = 'transparent';
+          });
+          
+          customQualityMenu.appendChild(autoItem);
+          
+          // Add separator
+          const separator = document.createElement('div');
+          separator.style.height = '1px';
+          separator.style.background = 'rgba(255, 255, 255, 0.3)';
+          separator.style.margin = '4px 0';
+          customQualityMenu.appendChild(separator);
+          
+          // Add quality options
+          qualities.forEach(quality => {
+            const menuItem = document.createElement('div');
+            menuItem.className = 'custom-quality-menu-item';
+            menuItem.textContent = quality.label;
+            menuItem.style.padding = '8px 16px';
+            menuItem.style.cursor = 'pointer';
+            menuItem.style.color = '#fff';
+            menuItem.style.display = 'flex';
+            menuItem.style.alignItems = 'center';
+            menuItem.style.justifyContent = 'space-between';
+            
+            // Add checkmark for active quality
+            const checkmark = document.createElement('span');
+            checkmark.textContent = '✓';
+            checkmark.style.marginLeft = '8px';
+            checkmark.style.color = '#00a8e1';
+            checkmark.style.display = 'none';
+            menuItem.appendChild(checkmark);
+            
+            menuItem.addEventListener('click', () => {
+              try {
+                // Disable ABR and select specific variant
+                player.configure({ abr: { enabled: false } });
+                player.selectVariantTrack(quality.variant, true);
+                customQualityMenu.style.display = 'none';
+                updateCustomQualityButtonLabel(quality.label);
+                
+                // Update checkmarks
+                customQualityMenu.querySelectorAll('.custom-quality-menu-item').forEach(item => {
+                  const check = item.querySelector('span');
+                  if (check) check.style.display = 'none';
+                });
+                checkmark.style.display = 'inline';
+              } catch (e) {
+                console.error('Error selecting quality:', e);
+              }
+            });
+            
+            // Highlight active quality
+            menuItem.addEventListener('mouseenter', () => {
+              menuItem.style.background = 'rgba(255, 255, 255, 0.1)';
+            });
+            menuItem.addEventListener('mouseleave', () => {
+              menuItem.style.background = 'transparent';
+            });
+            
+            customQualityMenu.appendChild(menuItem);
+          });
+          
+          // Toggle menu on button click
+          customQualityBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isVisible = customQualityMenu.style.display !== 'none';
+            customQualityMenu.style.display = isVisible ? 'none' : 'block';
+            
+            // Update active quality indicator
+            updateActiveQualityIndicator(qualities);
+          });
+          
+          // Close menu when clicking outside
+          document.addEventListener('click', (e) => {
+            if (!customQualityBtn.contains(e.target) && !customQualityMenu.contains(e.target)) {
+              customQualityMenu.style.display = 'none';
+            }
+          });
+          
+          // Update button label with current quality
+          updateActiveQualityIndicator(qualities);
+          
+          console.log('Custom quality selector created with labels:', qualities.map(q => q.label));
+      }
+      
+      /**
+       * Update custom quality button label
+       */
+      function updateCustomQualityButtonLabel(label) {
+        const customBtn = videoContainer.querySelector('.custom-quality-button');
+        if (customBtn) {
+          const icon = customBtn.querySelector('.shaka-quality-menu-button-icon');
+          if (icon) {
+            icon.textContent = label === 'Auto' ? 'HD' : label;
+          }
+        }
+      }
+      
+      /**
+       * Update active quality indicator in menu
+       */
+      function updateActiveQualityIndicator(qualities) {
+        try {
+          // Check if ABR is enabled
+          const abrConfig = player.getConfiguration().abr;
+          const isAbrEnabled = abrConfig && abrConfig.enabled !== false;
+          
+          if (isAbrEnabled) {
+            // ABR is enabled, show "Auto" as selected
+            const menuItems = videoContainer.querySelectorAll('.custom-quality-menu-item');
+            menuItems.forEach(item => {
+              const check = item.querySelector('span');
+              if (check) {
+                const itemText = item.textContent.trim().replace('✓', '').trim();
+                if (itemText === 'Auto') {
+                  check.style.display = 'inline';
+                  updateCustomQualityButtonLabel('Auto');
+                } else {
+                  check.style.display = 'none';
+                }
+              }
+            });
+            return;
+          }
+          
+          // ABR is disabled, find active variant
+          const activeVariant = player.getVariantTracks().find(track => track.active);
+          if (!activeVariant || !activeVariant.video) return;
+          
+          const activeHeight = activeVariant.video.height;
+          const activeBandwidth = activeVariant.bandwidth || 0;
+          const activeFrameRate = activeVariant.video.frameRate || 0;
+          const activeLabel = formatQualityLabel(activeHeight, activeBandwidth, activeFrameRate);
+          
+          // Find matching menu item and show checkmark (match by label or by quality object)
+          const menuItems = videoContainer.querySelectorAll('.custom-quality-menu-item');
+          menuItems.forEach(item => {
+            const check = item.querySelector('span');
+            if (check) {
+              const itemText = item.textContent.trim().replace('✓', '').trim();
+              if (itemText === activeLabel) {
+                check.style.display = 'inline';
+                updateCustomQualityButtonLabel(activeLabel);
+              } else if (itemText !== 'Auto') {
+                check.style.display = 'none';
+              }
+            }
+          });
+        } catch (error) {
+          console.error('Error updating active quality indicator:', error);
+        }
+      }
+
+      /**
+       * Update Shaka UI quality menu with extracted qualities
+       * Creates custom quality selector instead of using Shaka's default
+       */
+      function updateQualityMenu(qualities) {
+        if (!ui || !qualities || qualities.length === 0) {
+          return;
+        }
+        
+        try {
+          console.log('Available qualities from MPD:', qualities.map(q => q.label));
+          
+          // Create custom quality selector
+          createCustomQualitySelector(qualities);
+          
+        } catch (error) {
+          console.error('Error updating quality menu:', error);
+        }
+      }
+
+
+      /**
+       * Customize quality menu labels after menu is created
+       */
+      function customizeQualityMenuLabels(qualities) {
+        try {
+          const qualityMenu = videoContainer.querySelector('.shaka-quality-menu');
+          if (!qualityMenu) {
+            // Menu not ready yet, try again
+            setTimeout(() => customizeQualityMenuLabels(qualities), 300);
+            return;
+          }
+          
+          // Get all quality menu items
+          const menuItems = qualityMenu.querySelectorAll('.shaka-quality-menu-item');
+          
+          menuItems.forEach(item => {
+            const text = item.textContent.trim();
+            
+            // Try to match with our formatted labels
+            if (qualities) {
+              // Extract resolution from text (e.g., "1080p" or "1080p50")
+              const match = text.match(/(\d+)p(\d+)?/);
+              if (match) {
+                const height = parseInt(match[1]);
+                const existingFps = match[2] ? parseInt(match[2]) : null;
+                
+                // Find matching quality
+                const quality = qualities.find(q => {
+                  if (q.height === height) {
+                    // If existing label has fps, match by both height and fps
+                    if (existingFps) {
+                      return Math.round(q.frameRate) === existingFps;
+                    }
+                    // Otherwise match by height only (for lower fps)
+                    return q.frameRate < 50;
+                  }
+                  return false;
+                });
+                
+                if (quality && quality.label !== text) {
+                  // Update label if it's different
+                  const labelElement = item.querySelector('.shaka-quality-menu-item-label');
+                  if (labelElement) {
+                    labelElement.textContent = quality.label;
+                  } else {
+                    // Fallback: update entire text content
+                    const textNode = Array.from(item.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                    if (textNode) {
+                      textNode.textContent = quality.label;
+                    } else {
+                      item.textContent = quality.label;
+                    }
+                  }
+                }
+              }
+            }
+          });
+          
+        } catch (error) {
+          console.error('Error customizing quality menu labels:', error);
+        }
+      }
+
+        function getFeaturedMatch() {
+            const liveStream = streams.find(s => s.status === 'live');
+            return liveStream || streams[0];
+        }
+
+        function updateFeaturedMatch() {
+            const featuredMatch = getFeaturedMatch();
+            if (featuredMatch) {
+                featuredTitle.textContent = featuredMatch.title;
+                featuredDate.textContent = featuredMatch.date;
+                featuredVenue.textContent = featuredMatch.venue;
+                featuredDescription.textContent = featuredMatch.description || 
+                    `Watch ${featuredMatch.title.split(' vs ')[0]} take on ${featuredMatch.title.split(' vs ')[1]} in the ${featuredMatch.tournament} live on Prime.`;
+                
+                if (featuredMatch.status === 'live') {
+                    featuredBadge.textContent = 'LIVE';
+                    featuredBadge.style.display = 'inline-block';
+                } else if (featuredMatch.status === 'upcoming') {
+                    featuredBadge.textContent = 'UPCOMING';
+                    featuredBadge.style.display = 'inline-block';
+                } else {
+                    featuredBadge.style.display = 'none';
+                }
+            }
+        }
+
+        function populateEventsCarousel() {
+            eventsCarousel.innerHTML = '';
+            
+            streams.forEach((stream) => {
+                const card = document.createElement('div');
+                const hasImage = stream.image ? 'has-image' : '';
+                card.className = `event-card ${stream.status === 'live' ? 'live' : ''} ${hasImage}`;
+                
+                // Set background image if available
+                if (stream.image) {
+                    card.style.backgroundImage = `url(${stream.image})`;
+                }
+                
+                // Only show flags if no image
+                const flagsHTML = !stream.image ? `
+                    <div class="event-flags">
+                        <div class="flag">${stream.flags ? stream.flags[0] : '🏏'}</div>
+                        <div class="flag">${stream.flags ? stream.flags[1] : '🏏'}</div>
+                    </div>
+                ` : '';
+                
+                card.innerHTML = `
+                    <div class="event-card-content">
+                        <div class="event-status ${stream.status === 'live' ? 'live' : ''}">
+                            ${stream.status === 'live' ? 'LIVE' : 'UPCOMING'}
+                        </div>
+                        ${flagsHTML}
+                    <div class="event-title">${stream.title}</div>
+                    <div class="event-time">${stream.date}</div>
+                        <a href="https://t.me/PakistanTeam" target="_blank" rel="noopener" class="event-prime-logo">Pakistan Team</a>
+                    </div>
+                `;
+                
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('a.event-prime-logo')) return;
+                    if (stream.manifest) {
+                        showTgPopupThenPlay(stream);
+                    }
+                });
+                const cardLink = card.querySelector('a.event-prime-logo');
+                if (cardLink) cardLink.addEventListener('click', (e) => e.stopPropagation());
+                
+                eventsCarousel.appendChild(card);
+            });
+        }
+
+        function showLandingPage() {
+            landingPage.classList.remove('hidden');
+            playerPage.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            if (player && playerInitialized) {
+                try {
+                    player.unload();
+                } catch (e) {
+                    console.error('Error unloading player:', e);
+                }
+            }
+            currentStream = null;
+        }
+
+        async function showPlayerPage() {
+            landingPage.classList.add('hidden');
+            playerPage.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+        // Force mobile video attributes
+                video.setAttribute('playsinline', 'true');
+                video.setAttribute('webkit-playsinline', 'true');
+        video.setAttribute('x5-playsinline', 'true');
+        
+        // Fix viewport height on mobile
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            if (!playerInitialized) {
+                await initPlayer();
+                await new Promise(resolve => setTimeout(resolve, 300));
+        }
+        
+        // Recalculate on orientation change
+        window.addEventListener('orientationchange', () => {
+          setTimeout(() => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            ensureControlsVisible();
+          }, 100);
+        });
+        
+        // Recalculate on resize
+        window.addEventListener('resize', () => {
+          const vh = window.innerHeight * 0.01;
+          document.documentElement.style.setProperty('--vh', `${vh}px`);
+          ensureControlsVisible();
+        });
+      }
+
+      function ensureControlsVisible() {
+        const controlsContainer = videoContainer.querySelector('.shaka-controls-container');
+        if (controlsContainer) {
+          controlsContainer.style.display = 'flex';
+          controlsContainer.style.opacity = '1';
+          controlsContainer.style.visibility = 'visible';
+          controlsContainer.style.pointerEvents = 'auto';
+          controlsContainer.style.position = 'absolute';
+          controlsContainer.style.bottom = '0';
+          controlsContainer.style.left = '0';
+          controlsContainer.style.right = '0';
+          controlsContainer.style.width = '100%';
+          controlsContainer.style.zIndex = '1002';
+        }
+        
+        // Also ensure viewer count is visible in player header
+        const viewerCountEl = document.getElementById('viewerCountPlayer');
+        if (viewerCountEl) {
+          viewerCountEl.style.display = 'inline-flex';
+          viewerCountEl.style.opacity = '1';
+          viewerCountEl.style.visibility = 'visible';
+        }
+      }
+
+      function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               (window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
+      }
+
+        async function initPlayer() {
+            if (!window.shaka) {
+                console.error('Shaka Player not loaded');
+                return;
+            }
+
+            if (playerInitialized) {
+          console.log('Player already initialized');
+                return;
+            }
+
+            try {
+          // Clean up any existing instances
+                if (ui) {
+                    try {
+                        ui.destroy();
+                    } catch (e) {
+              console.log('Error destroying UI:', e);
+            }
+            ui = null;
+          }
+          
+          if (player) {
+            try {
+              await player.unload();
+              player.destroy();
+            } catch (e) {
+              console.log('Error destroying player:', e);
+            }
+            player = null;
+          }
+          
+          // Remove native video controls
+                video.removeAttribute('controls');
+                video.controls = false;
+                
+          // Install Shaka polyfills if needed
+          shaka.polyfill.installAll();
+          
+          // Create player
+                player = new shaka.Player(video);
+                
+          // Configure player settings
+                player.configure({
+                    streaming: {
+                        bufferingGoal: 30,
+                        rebufferingGoal: 5,
+                        bufferBehind: 30,
+                        jumpLargeGaps: true,
+                        lowLatencyMode: false
+                    },
+                    manifest: {
+                        dash: {
+                            ignoreMinBufferTime: true,
+                            autoCorrectDrift: true,
+                            initialSegmentLimit: 20
+                        }
+                    }
+                });
+
+                player.configure('streaming.presentationDelay', 20);
+
+          // Create UI with default Shaka controls (original layout)
+          ui = new shaka.ui.Overlay(player, videoContainer, video);
+          // PiP is in overflow menu by default (YouTube-style: overflow ⋮ → Picture-in-Picture)
+          if (ui.configure && document.pictureInPictureEnabled) {
+            ui.configure({ overflowMenuButtons: ['quality', 'language', 'playback_rate', 'picture_in_picture'] });
+          }
+          
+          // Error handling
+          player.addEventListener('error', (event) => {
+            console.error('Player error:', event.detail);
+          });
+
+          // Listen for variant changes to log current quality and update custom selector
+          player.addEventListener('variantchanged', () => {
+            try {
+              const activeVariant = player.getVariantTracks().find(track => track.active);
+              if (activeVariant && activeVariant.video) {
+                const q = formatQualityLabel(activeVariant.video.height, activeVariant.bandwidth, activeVariant.video.frameRate);
+                console.log('Now playing:', q);
+                
+                // Update custom quality button label
+                if (window.availableQualities) {
+                  updateActiveQualityIndicator(window.availableQualities);
+                }
+              }
+            } catch (error) {
+              console.error('Error getting active variant:', error);
+            }
+          });
+
+
+          // Force controls to be visible on mobile after initialization
+          const isMobile = isMobileDevice();
+          if (isMobile) {
+            // Wait for UI to render, then ensure controls are visible
+                setTimeout(() => {
+              ensureControlsVisible();
+              
+              // Also ensure all buttons are touchable
+              const buttons = videoContainer.querySelectorAll('.shaka-controls-button');
+              buttons.forEach(btn => {
+                btn.style.touchAction = 'manipulation';
+                btn.style.pointerEvents = 'auto';
+              });
+            }, 500);
+            
+            // Show/hide controls on video tap
+            let controlsTimeout;
+            
+            function showControlsFor5Seconds() {
+              const controlsContainer = videoContainer.querySelector('.shaka-controls-container');
+              if (controlsContainer) {
+                ensureControlsVisible();
+                controlsContainer.style.transition = 'opacity 0.3s';
+                
+                // Auto-hide after 5 seconds
+                clearTimeout(controlsTimeout);
+                controlsTimeout = setTimeout(() => {
+                  controlsContainer.style.opacity = '0';
+                setTimeout(() => {
+                    controlsContainer.style.display = 'none';
+                  }, 300);
+                }, 5000);
+              }
+            }
+            
+            videoContainer.addEventListener('click', (e) => {
+              // Don't interfere with button clicks
+              if (e.target.closest('.shaka-controls-button') || 
+                  e.target.closest('.shaka-seek-bar-container') ||
+                  e.target.closest('.shaka-range-container')) {
+                return;
+              }
+              
+              const controlsContainer = videoContainer.querySelector('.shaka-controls-container');
+              if (controlsContainer) {
+                // Toggle controls visibility
+                const isVisible = controlsContainer.style.opacity !== '0' && 
+                                controlsContainer.style.display !== 'none';
+                
+                if (isVisible) {
+                  controlsContainer.style.opacity = '0';
+                  controlsContainer.style.transition = 'opacity 0.3s';
+                  clearTimeout(controlsTimeout);
+                  controlsTimeout = setTimeout(() => {
+                    controlsContainer.style.display = 'none';
+                  }, 300);
+                } else {
+                  showControlsFor5Seconds();
+                }
+              }
+            });
+            
+            // Show controls on mouse move or touch (including in fullscreen)
+            let hideControlsTimeout = null;
+            let isHovering = false;
+            let lastMoveTime = 0;
+            
+            function isInFullscreen() {
+              return !!(document.fullscreenElement || 
+                       document.webkitFullscreenElement ||
+                       document.mozFullScreenElement ||
+                       document.msFullscreenElement);
+            }
+            
+            function handleMouseMoveOrTouch() {
+              if (!playerInitialized || !video) return;
+              
+              const controlsContainer = videoContainer.querySelector('.shaka-controls-container');
+              if (!controlsContainer) return;
+              
+              const inFullscreen = isInFullscreen();
+              const now = Date.now();
+              
+              // Throttle rapid movements (only process every 100ms)
+              if (now - lastMoveTime < 100 && !inFullscreen) {
+                return;
+              }
+              lastMoveTime = now;
+              
+              // Always show controls on interaction
+              ensureControlsVisible();
+              controlsContainer.style.transition = 'opacity 0.2s';
+              controlsContainer.style.opacity = '1';
+              controlsContainer.style.display = 'flex';
+              
+              // Show viewer count in header when controls are visible
+              const viewerCountEl = document.getElementById('viewerCountPlayer');
+              if (viewerCountEl) {
+                viewerCountEl.style.display = 'inline-flex';
+                viewerCountEl.style.opacity = '1';
+                viewerCountEl.style.visibility = 'visible';
+                viewerCountEl.style.transition = 'opacity 0.2s';
+              }
+              
+              // Clear any existing hide timeout
+              if (hideControlsTimeout) {
+                clearTimeout(hideControlsTimeout);
+                hideControlsTimeout = null;
+              }
+              
+              // In fullscreen, hide after 5 seconds of no movement (if not hovering)
+              // In normal mode, use default behavior
+              if (inFullscreen) {
+                hideControlsTimeout = setTimeout(() => {
+                  if (!isHovering) {
+                    controlsContainer.style.opacity = '0';
+                    if (viewerCountEl) {
+                      viewerCountEl.style.opacity = '0';
+                    }
+                setTimeout(() => {
+                      if (!isHovering) {
+                        controlsContainer.style.display = 'none';
+                        if (viewerCountEl) {
+                          viewerCountEl.style.visibility = 'hidden';
+                        }
+                      }
+                    }, 300);
+                  }
+                }, 5000);
+              }
+            }
+            
+            // Handle mouse enter/leave for hover state
+            function handleMouseEnter() {
+              isHovering = true;
+              if (isInFullscreen()) {
+                handleMouseMoveOrTouch();
+              }
+            }
+            
+            function handleMouseLeave() {
+              isHovering = false;
+              // Start hide timeout if in fullscreen
+              if (isInFullscreen()) {
+                const controlsContainer = videoContainer.querySelector('.shaka-controls-container');
+                if (controlsContainer) {
+                  if (hideControlsTimeout) {
+                    clearTimeout(hideControlsTimeout);
+                  }
+                  hideControlsTimeout = setTimeout(() => {
+                    controlsContainer.style.opacity = '0';
+                    setTimeout(() => {
+                      controlsContainer.style.display = 'none';
+                    }, 300);
+                  }, 5000);
+                }
+              }
+            }
+            
+            // Add event listeners to video container
+            videoContainer.addEventListener('mousemove', handleMouseMoveOrTouch);
+            videoContainer.addEventListener('mouseenter', handleMouseEnter);
+            videoContainer.addEventListener('mouseleave', handleMouseLeave);
+            videoContainer.addEventListener('touchstart', handleMouseMoveOrTouch);
+            videoContainer.addEventListener('touchmove', handleMouseMoveOrTouch);
+            
+            // Also listen on document and video for fullscreen mode
+            document.addEventListener('mousemove', (e) => {
+              if (isInFullscreen()) {
+                handleMouseMoveOrTouch();
+              }
+            });
+            
+            document.addEventListener('touchstart', (e) => {
+              if (isInFullscreen()) {
+                handleMouseMoveOrTouch();
+              }
+            });
+            
+            document.addEventListener('touchmove', (e) => {
+              if (isInFullscreen()) {
+                handleMouseMoveOrTouch();
+              }
+            });
+            
+            video.addEventListener('mousemove', handleMouseMoveOrTouch);
+            video.addEventListener('touchstart', handleMouseMoveOrTouch);
+            video.addEventListener('touchmove', handleMouseMoveOrTouch);
+            
+            // Listen for fullscreen changes to ensure controls work
+            const fullscreenChangeHandler = () => {
+              if (isInFullscreen()) {
+                // In fullscreen, show controls immediately on entry
+                setTimeout(() => {
+                  handleMouseMoveOrTouch();
+                }, 100);
+              } else {
+                // Exit fullscreen - ensure controls are visible
+                const controlsContainer = videoContainer.querySelector('.shaka-controls-container');
+                if (controlsContainer) {
+                  ensureControlsVisible();
+                }
+              }
+            };
+            
+            document.addEventListener('fullscreenchange', fullscreenChangeHandler);
+            document.addEventListener('webkitfullscreenchange', fullscreenChangeHandler);
+            document.addEventListener('mozfullscreenchange', fullscreenChangeHandler);
+            document.addEventListener('MSFullscreenChange', fullscreenChangeHandler);
+          }
+
+                playerInitialized = true;
+          console.log('Player initialized with original Shaka controls layout');
+
+                setupCustomPlayerButtons();
+                setupKeyboardControls();
+
+            } catch (error) {
+                console.error('Error initializing player:', error);
+          playerInitialized = false;
+            }
+        }
+
+        async function loadStream(stream) {
+            if (!player || !playerInitialized) {
+          console.warn('Player not initialized');
+                return;
+            }
+
+            if (currentStream === stream.id) return;
+            
+            currentStream = stream.id;
+            currentMatchTitle.textContent = stream.title;
+            currentTournament.textContent = stream.tournament;
+            
+            try {
+                console.log('Loading stream:', stream.title);
+                
+                if (player) {
+                    await player.unload();
+                }
+                
+                player.configure({
+                    drm: {
+                        clearKeys: stream.keys
+                    }
+                });
+                
+                await player.load(stream.manifest);
+                
+          console.log('Stream loaded successfully:', stream.title);
+          
+          // Extract qualities and audio tracks from MPD after stream loads
+                setTimeout(() => {
+            try {
+              // Extract video qualities
+              const qualities = extractQualitiesFromMPD(player);
+              console.log('Extracted qualities:', qualities);
+              if (qualities.length > 0) {
+                console.log('Quality labels:', qualities.map(q => q.label + ' (height: ' + q.height + ')'));
+                updateQualityMenu(qualities);
+              } else {
+                console.warn('No qualities found in MPD');
+              }
+              setupCustomPlayerButtons();
+            } catch (error) {
+              console.error('Error extracting qualities/audio:', error);
+            }
+                }, 1000);
+                
+          // Ensure controls are visible after stream loads (mobile)
+          if (isMobileDevice()) {
+                setTimeout(() => {
+              ensureControlsVisible();
+            }, 500);
+          }
+                
+            } catch (error) {
+          console.error('Error loading stream:', error);
+            }
+        }
+
+        function setupCustomPlayerButtons() {
+          const injectButtons = () => {
+            const controlsContainer = videoContainer.querySelector('.shaka-controls-container');
+            if (!controlsContainer || videoContainer.querySelector('.player-custom-left')) return;
+            
+            const leftWrap = document.createElement('div');
+            leftWrap.className = 'player-custom-left';
+            leftWrap.style.cssText = 'display:flex;align-items:center;';
+            
+            const liveBtn = document.createElement('button');
+            liveBtn.className = 'custom-live-btn shaka-controls-button';
+            liveBtn.setAttribute('aria-label', 'Go to live');
+            liveBtn.innerHTML = '<i class="fas fa-circle-dot"></i> LIVE';
+            liveBtn.title = 'Go to live';
+            liveBtn.style.display = 'none';
+            
+            liveBtn.addEventListener('click', () => {
+              try {
+                let liveEnd = null;
+                if (player) {
+                  const range = player.seekRange ? player.seekRange() : (player.getSeekRange && player.getSeekRange());
+                  if (range && typeof range.end === 'number' && isFinite(range.end)) liveEnd = range.end;
+                }
+                if (liveEnd == null && video.seekable && video.seekable.length) {
+                  liveEnd = video.seekable.end(video.seekable.length - 1);
+                }
+                if (liveEnd == null && video.duration && isFinite(video.duration)) liveEnd = video.duration;
+                if (liveEnd != null) video.currentTime = liveEnd;
+              } catch (e) { console.error('Seek to live error:', e); }
+            });
+            
+            leftWrap.appendChild(liveBtn);
+            
+            const firstPanel = controlsContainer.querySelector('.shaka-controls-button-panel');
+            if (firstPanel) {
+              firstPanel.insertBefore(leftWrap, firstPanel.firstChild);
+            } else {
+              controlsContainer.insertBefore(leftWrap, controlsContainer.firstChild);
+            }
+            
+            const updateLiveBtn = () => {
+              const stream = currentStream ? streams.find(s => s.id === currentStream) : null;
+              if (!stream || stream.status !== 'live') {
+                liveBtn.style.display = 'none';
+                return;
+              }
+              try {
+                let liveEnd = Infinity;
+                if (player) {
+                  const r = player.seekRange ? player.seekRange() : (player.getSeekRange && player.getSeekRange());
+                  if (r && typeof r.end === 'number' && isFinite(r.end)) liveEnd = r.end;
+                }
+                if (liveEnd === Infinity && video.seekable && video.seekable.length)
+                  liveEnd = video.seekable.end(video.seekable.length - 1);
+                if (liveEnd === Infinity && video.duration && isFinite(video.duration)) liveEnd = video.duration;
+                const behind = isFinite(liveEnd) && liveEnd < Infinity && video.currentTime < liveEnd - 10;
+                liveBtn.style.display = behind ? 'flex' : 'none';
+              } catch (e) {
+                liveBtn.style.display = 'none';
+              }
+            };
+            
+            video.addEventListener('timeupdate', updateLiveBtn);
+            if (player) player.addEventListener('loaded', updateLiveBtn);
+            setInterval(updateLiveBtn, 2000);
+          };
+          
+          setTimeout(injectButtons, 800);
+          setTimeout(injectButtons, 2000);
+        }
+
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    return;
+                }
+                
+                if (!playerPage.classList.contains('active')) {
+                    return;
+                }
+          
+          // Skip keyboard controls on mobile
+          if (isMobileDevice()) {
+                    return;
+                }
+                
+                switch(e.key.toLowerCase()) {
+                    case ' ':
+                    case 'k':
+                        e.preventDefault();
+                        if (video.paused) {
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                        break;
+                    case 'm':
+                        video.muted = !video.muted;
+                        break;
+                    case 'l':
+                        const liveBtn = videoContainer.querySelector('.custom-live-btn');
+                        if (liveBtn && liveBtn.style.display !== 'none') liveBtn.click();
+                        break;
+                    case 'f':
+                        if (video.requestFullscreen) {
+                            video.requestFullscreen();
+                        } else if (video.webkitRequestFullscreen) {
+                            video.webkitRequestFullscreen();
+                        } else if (video.mozRequestFullScreen) {
+                            video.mozRequestFullScreen();
+                        } else if (video.msRequestFullscreen) {
+                            video.msRequestFullscreen();
+                        }
+                        break;
+                    case 'escape':
+                        if (document.fullscreenElement) {
+                            document.exitFullscreen();
+                        }
+                        break;
+                    case 'h':
+                        e.preventDefault();
+                        showLandingPage();
+                        break;
+                    case 'arrowleft':
+                        e.preventDefault();
+                        video.currentTime = Math.max(0, video.currentTime - 10);
+                        break;
+                    case 'arrowright':
+                        e.preventDefault();
+                        video.currentTime = Math.min(video.duration || 0, video.currentTime + 10);
+                        break;
+                    case 'arrowup':
+                        e.preventDefault();
+                        video.volume = Math.min(1, video.volume + 0.1);
+                        break;
+                    case 'arrowdown':
+                        e.preventDefault();
+                        video.volume = Math.max(0, video.volume - 0.1);
+                        break;
+                    case '1':
+                        if (streams[0]) loadStream(streams[0]);
+                        break;
+                    case '2':
+                        if (streams[1]) loadStream(streams[1]);
+                        break;
+                    case '3':
+                        if (streams[2]) loadStream(streams[2]);
+                        break;
+                    case '4':
+                        if (streams[3]) loadStream(streams[3]);
+                        break;
+                }
+            });
+        }
+
+        watchLiveBtn.addEventListener('click', () => {
+            const featuredMatch = getFeaturedMatch();
+            if (featuredMatch && featuredMatch.manifest) {
+                showTgPopupThenPlay(featuredMatch);
+            }
+        });
+
+        homeBtnHeader.addEventListener('click', () => {
+            showLandingPage();
+        });
+
+        // Share button functionality - copy homepage link
+        const shareBtn = document.getElementById('shareBtn');
+        if (shareBtn) {
+            shareBtn.addEventListener('click', async () => {
+                try {
+                    const homepageUrl = window.location.origin + window.location.pathname;
+                    
+                    // Try to use Clipboard API
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(homepageUrl);
+                        // Show feedback
+                        const originalTitle = shareBtn.getAttribute('title');
+                        shareBtn.setAttribute('title', 'Link copied!');
+                        setTimeout(() => {
+                            shareBtn.setAttribute('title', originalTitle || 'Share');
+                        }, 2000);
+                    } else {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = homepageUrl;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        
+                        const originalTitle = shareBtn.getAttribute('title');
+                        shareBtn.setAttribute('title', 'Link copied!');
+                        setTimeout(() => {
+                            shareBtn.setAttribute('title', originalTitle || 'Share');
+                        }, 2000);
+                    }
+                } catch (error) {
+                    console.error('Error copying link:', error);
+                    alert('Failed to copy link. Please copy manually: ' + window.location.href);
+                }
+            });
+        }
+
+        updateFeaturedMatch();
+        populateEventsCarousel();
+  </script>
+</body>
+</html>
