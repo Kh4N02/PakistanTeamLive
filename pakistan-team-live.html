@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/controls.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/shaka-player.compiled.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/shaka-player.ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.6.15/dist/hls.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -1244,7 +1245,7 @@
     </div>
 
     <script>
-      const streams = (function(){var _='==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';try{return JSON.parse(atob(_.split('').reverse().join('')));}catch(e){return [];}})();
+      const streams = (function(){var _='==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';try{return JSON.parse(atob(_.split('').reverse().join('')));}catch(e){return [];}})();
 
         // DevTools deterrent: browsers do NOT let pages close Inspect Element. This runs
         // debugger periodically so that if DevTools is open with "Pause on breakpoints" on,
@@ -1253,6 +1254,8 @@
 
         let player = null;
         let ui = null;
+        let hlsInstance = null;
+        let currentPlayerMode = null; // 'shaka' | 'hls'
         let currentStream = null;
         let currentRequestHeaders = {};
         let playerInitialized = false;
@@ -1976,8 +1979,8 @@
                 return;
             }
 
-            if (playerInitialized) {
-          console.log('Player already initialized');
+            if (playerInitialized && player) {
+          console.log('Shaka player already initialized');
                 return;
             }
 
@@ -2293,19 +2296,86 @@
         }
 
         async function loadStream(stream) {
-            if (!player || !playerInitialized) {
-          console.warn('Player not initialized');
+            if (currentStream === stream.id) return;
+            
+            const manifestUri = typeof stream.manifest === 'string' ? stream.manifest : (stream.manifest && stream.manifest.uri) ? stream.manifest.uri : null;
+            if (!manifestUri) {
+                console.error('No manifest URI for this stream');
                 return;
             }
-
-            if (currentStream === stream.id) return;
+            
+            const isM3u8 = /\.m3u8(\?|$)/i.test(manifestUri) || manifestUri.indexOf('m3u8') !== -1;
             
             currentStream = stream.id;
             currentMatchTitle.textContent = stream.title;
             currentTournament.textContent = stream.tournament;
             
             try {
-                console.log('Loading stream:', stream.title);
+                console.log('Loading stream:', stream.title, isM3u8 ? '(HLS/m3u8)' : '(DASH/MPD)');
+                
+                if (isM3u8) {
+                    // --- HLS/m3u8: use HLS.js (or native on Safari), same approach as m3u8-player.net ---
+                    if (player) {
+                        try {
+                            await player.unload();
+                            if (ui) { ui.destroy(); ui = null; }
+                            player.destroy();
+                        } catch (e) { console.warn('Shaka teardown:', e); }
+                        player = null;
+                        playerInitialized = false;
+                    }
+                    if (hlsInstance) {
+                        hlsInstance.destroy();
+                        hlsInstance = null;
+                    }
+                    video.removeAttribute('controls');
+                    video.controls = true;
+                    video.src = '';
+                    video.load();
+                    
+                    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = manifestUri;
+                        currentPlayerMode = 'hls';
+                        console.log('Stream loaded (native HLS):', stream.title);
+                        return;
+                    }
+                    if (window.Hls && Hls.isSupported()) {
+                        hlsInstance = new Hls({ enableWorker: true });
+                        hlsInstance.attachMedia(video);
+                        hlsInstance.on(Hls.Events.ERROR, function (event, data) {
+                            if (data.fatal) console.error('HLS error:', data);
+                        });
+                        hlsInstance.loadSource(manifestUri);
+                        currentPlayerMode = 'hls';
+                        playerInitialized = true;
+                        console.log('Stream loaded (HLS.js):', stream.title);
+                        if (isMobileDevice()) {
+                            setTimeout(function () { ensureControlsVisible(); }, 500);
+                        }
+                        return;
+                    }
+                    console.error('HLS not supported in this browser');
+                    return;
+                }
+                
+                // --- DASH/MPD: use Shaka Player (first 3 streams) ---
+                if (hlsInstance) {
+                    hlsInstance.destroy();
+                    hlsInstance = null;
+                }
+                video.src = '';
+                video.load();
+                video.removeAttribute('controls');
+                video.controls = false;
+                currentPlayerMode = 'shaka';
+                
+                if (!player) {
+                    await initPlayer();
+                }
+                if (!player || !playerInitialized) {
+                    console.warn('Shaka player not initialized');
+                    return;
+                }
                 
                 if (player) {
                     await player.unload();
@@ -2325,43 +2395,30 @@
                     }
                 });
                 
-                // Shaka load() expects a URI string; support object { uri, headers } from config
-                const manifestUri = typeof stream.manifest === 'string' ? stream.manifest : (stream.manifest && stream.manifest.uri) ? stream.manifest.uri : null;
                 currentRequestHeaders = (stream.manifest && stream.manifest.headers) ? stream.manifest.headers : {};
-                if (!manifestUri) {
-                    throw new Error('No manifest URI for this stream');
-                }
                 await player.load(manifestUri);
                 
-          console.log('Stream loaded successfully:', stream.title);
-          
-          // Extract qualities and audio tracks from MPD after stream loads
-                setTimeout(() => {
-            try {
-              // Extract video qualities
-              const qualities = extractQualitiesFromMPD(player);
-              console.log('Extracted qualities:', qualities);
-              if (qualities.length > 0) {
-                console.log('Quality labels:', qualities.map(q => q.label + ' (height: ' + q.height + ')'));
-                updateQualityMenu(qualities);
-              } else {
-                console.warn('No qualities found in MPD');
-              }
-              setupCustomPlayerButtons();
-            } catch (error) {
-              console.error('Error extracting qualities/audio:', error);
-            }
+                console.log('Stream loaded successfully:', stream.title);
+                
+                setTimeout(function () {
+                    try {
+                        var qualities = extractQualitiesFromMPD(player);
+                        console.log('Extracted qualities:', qualities);
+                        if (qualities.length > 0) {
+                            updateQualityMenu(qualities);
+                        }
+                        setupCustomPlayerButtons();
+                    } catch (error) {
+                        console.error('Error extracting qualities/audio:', error);
+                    }
                 }, 1000);
                 
-          // Ensure controls are visible after stream loads (mobile)
-          if (isMobileDevice()) {
-                setTimeout(() => {
-              ensureControlsVisible();
-            }, 500);
-          }
+                if (isMobileDevice()) {
+                    setTimeout(function () { ensureControlsVisible(); }, 500);
+                }
                 
             } catch (error) {
-          console.error('Error loading stream:', error);
+                console.error('Error loading stream:', error);
             }
         }
 
