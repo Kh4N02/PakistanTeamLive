@@ -1,13 +1,14 @@
 /**
- * Build script: reads matches-config.json, encodes it (base64 + reverse),
- * and injects into pakistan-team-live.html so stream data is not stored in plain text.
+ * Build script: reads matches-config.json, optionally substitutes __ENV_VAR__ from .env,
+ * then encodes and injects into pakistan-team-live.html.
+ *
+ * Manifest = MPD (DASH). Can be:
+ *   - A string: MPD URL, e.g. "https://example.com/stream.mpd"
+ *   - An object for Shaka: { "uri": "https://...mpd", "headers": { "Authorization": "Bearer ..." } }
+ *
+ * Keep secrets (MPD URLs, auth headers, keys) in .env — never commit .env or matches-config.json.
  *
  * Usage: node build.js
- *
- * - Edit matches-config.json with your 3 matches (title, date, venue, image, manifest, etc.).
- * - Run: node build.js
- * - Commit only pakistan-team-live.html to GitHub (add matches-config.json to .gitignore).
- * - On GitHub Pages, only the encoded payload is visible; raw config is not in the repo.
  */
 
 const fs = require('fs');
@@ -15,6 +16,48 @@ const path = require('path');
 
 const CONFIG_PATH = path.join(__dirname, 'matches-config.json');
 const HTML_PATH = path.join(__dirname, 'pakistan-team-live.html');
+const ENV_PATH = path.join(__dirname, '.env');
+
+/** Load .env into process.env (simple parser, no extra deps) */
+function loadEnv() {
+  if (!fs.existsSync(ENV_PATH)) return;
+  const content = fs.readFileSync(ENV_PATH, 'utf8');
+  content.split('\n').forEach((line) => {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) return;
+    const eq = trimmed.indexOf('=');
+    if (eq === -1) return;
+    const key = trimmed.slice(0, eq).trim();
+    let val = trimmed.slice(eq + 1).trim();
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'")))
+      val = val.slice(1, -1);
+    process.env[key] = val;
+  });
+}
+
+/** Replace __ENV_VARNAME__ in any string with process.env.VARNAME */
+function substituteEnv(obj) {
+  if (obj === null || obj === undefined) return;
+  if (typeof obj === 'string') {
+    const m = obj.match(/^__ENV_([A-Za-z0-9_]+)__$/);
+    if (m && process.env[m[1]] !== undefined) return process.env[m[1]];
+    return;
+  }
+  if (Array.isArray(obj)) {
+    obj.forEach((item) => substituteEnv(item));
+    return;
+  }
+  if (typeof obj === 'object') {
+    for (const key of Object.keys(obj)) {
+      if (typeof obj[key] === 'string') {
+        const m = obj[key].match(/^__ENV_([A-Za-z0-9_]+)__$/);
+        if (m && process.env[m[1]] !== undefined) obj[key] = process.env[m[1]];
+      } else {
+        substituteEnv(obj[key]);
+      }
+    }
+  }
+}
 
 function encodePayload(data) {
   const json = JSON.stringify(data);
@@ -23,6 +66,8 @@ function encodePayload(data) {
 }
 
 function main() {
+  loadEnv();
+
   if (!fs.existsSync(CONFIG_PATH)) {
     console.error('matches-config.json not found. Copy from matches-config.example.json and fill in your matches.');
     process.exit(1);
@@ -41,6 +86,8 @@ function main() {
     console.error('matches-config.json must be a JSON array of match objects.');
     process.exit(1);
   }
+
+  substituteEnv(data);
 
   const encoded = encodePayload(data);
 

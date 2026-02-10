@@ -80,9 +80,11 @@ Match data (titles, dates, images, MPD/keys) is kept in an **external file** so 
    - Copy `matches-config.example.json` to `matches-config.json`.
    - Fill in your 3 matches. Each object can include:
      - `title`, `date`, `venue`, `status` (`"live"` or `"upcoming"`), `tournament`, `description`
-     - `image` — URL for the card background (like India vs USA / PAK vs SL)
-     - `flags` — e.g. `["🇵🇰", "🇱🇰"]`
-     - `manifest` — what Shaka loads (e.g. `{ "uri": "https://...mpd", "headers": { ... } }`). Get this from your stream source.
+     - `image` — URL for the card background
+     - `flags` — e.g. `["🇵🇰", "🇺🇸"]`
+     - **`manifest`** — the stream for Shaka Player (MPD = DASH manifest), e.g. `"manifest": { "uri": "__ENV_STREAM1_MPD__" }`.
+     - **`keys`** — Shaka clearKeys as one-line JSON. Your source often gives lines like `keyIdHex:keyHex`; convert to `{"keyIdHex":"keyHex",...}` and put in `.env` as `STREAM1_KEYS=...`, then in config `"keys": "__ENV_STREAM1_KEYS__"`.
+     - To keep MPD and keys **out of the config file**, put them in **`.env`** and use placeholders: `__ENV_STREAM1_MPD__`, `__ENV_STREAM1_KEYS__`, etc. Copy `.env.example` to `.env` and fill in real values; **never commit `.env`** (it is in `.gitignore`). See **SETUP-STREAMS.md** for a full step-by-step.
    - To start from your current live page: open the page in the browser, DevTools → Console, run:  
      `copy(JSON.stringify(window._s))`  
      then paste into `matches-config.json` (as a JSON array) and add/update `image` URLs as you like.
@@ -98,7 +100,7 @@ git add pakistan-team-live.html index.html build.js matches-config.example.json 
   git commit -m "Update streams"
   git push
   ```
-  (Do **not** add `matches-config.json` — it is in `.gitignore` and stays only on your machine.)
+  (Do **not** add `matches-config.json` or `.env` — both are in `.gitignore` and stay only on your machine.)
 
 ### When you need to change matches
 
@@ -110,8 +112,14 @@ GitHub Pages will redeploy. The link (e.g. `https://yourusername.github.io/t20li
 
 ### What gets encoded
 
-- The build script turns the JSON array into a single string: **JSON → base64 → reverse**. That string is embedded in `pakistan-team-live.html`.
-- So in the repo and in "View Page Source", people see only that encoded blob, not the raw `.mpd` URLs or keys. They cannot open `matches-config.json` on GitHub because it is not committed.
+- The build script loads `.env`, then reads `matches-config.json` and replaces any `__ENV_VARNAME__` with the value from `.env`. The resulting array is then **JSON → base64 → reverse** and embedded in `pakistan-team-live.html`.
+- So in the repo, people see only the encoded blob in the HTML; they cannot open `matches-config.json` or `.env` on GitHub (both are in `.gitignore`). Your secrets stay in `.env` and the config file on your machine only.
+
+### Keeping MPD and keys safe
+
+- **Yes, manifest is the MPD** (DASH manifest URL). Keys or auth are usually passed via **headers** (e.g. `Authorization: Bearer ...`) in the manifest object.
+- Put MPD URLs and auth/keys in **`.env`** and reference them in the config as `__ENV_STREAM1_MPD__`, `__ENV_STREAM1_AUTH__`, etc. Never commit `.env`; the build script injects those values when you run `node build.js`.
+- **Note:** The built HTML that you push still contains the encoded payload (with the substituted values). So anyone who opens the live page can recover the stream data via dev tools. For a private Telegram audience this is a common trade-off; for stronger protection you’d need a backend that serves keys only to authenticated users.
 
 ---
 
