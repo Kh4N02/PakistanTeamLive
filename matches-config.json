@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Netherlands vs Namibia",
+    "date": "10 Feb 2026, 10:30 PKT",
+    "venue": "Arun Jaitley Stadium, Delhi",
+    "status": "live",
+    "tournament": "ICC Men's T20 World Cup 2026",
+    "description": "Watch Netherlands take on Namibia live on Prime.",
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.985e1e3e-c64a-40b9-b2aa-387f8c63b9b9/9/BOXART-16X9/en-US/1920x1080._UR1920,1080_SX624_FMpng_.png",
+    "flags": ["🇳🇱", "🇳🇦"],
+    "manifest": {
+      "uri": "__ENV_STREAM1_MPD__"
+    },
+    "keys": "__ENV_STREAM1_KEYS__"
+  },
+  {
+    "title": "New Zealand vs UAE",
+    "date": "10 Feb 2026, 14:30 PKT",
+    "venue": "MA Chidambaram Stadium, Chennai",
+    "status": "live",
+    "tournament": "ICC Men's T20 World Cup 2026",
+    "description": "Watch New Zealand take on UAE live on Prime.",
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.3c858cb5-20c8-4b8b-9b8f-332eec12d488/8/BOXART-16X9/en-US/1920x1080._UR1920,1080_SX624_FMpng_.png",
+    "flags": ["🇳🇿", "🇦🇪"],
+    "manifest": {
+      "uri": "__ENV_STREAM2_MPD__"
+    },
+    "keys": "__ENV_STREAM2_KEYS__"
+  },
+  {
+    "title": "Pakistan vs USA",
+    "date": "10 Feb 2026, 18:30 PKT",
+    "venue": "SSC Cricket Ground, Colombo",
+    "status": "live",
+    "tournament": "ICC Men's T20 World Cup 2026",
+    "description": "Watch Pakistan take on USA live on Prime.",
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.e50c8248-a7f1-4439-89c2-b6aed05c713b/5/BOXART-16X9/en-US/1920x1080._UR1920,1080_SX624_FMpng_.png",
+    "flags": ["🇵🇰", "🇺🇸"],
+    "manifest": {
+      "uri": "__ENV_STREAM3_MPD__"
+    },
+    "keys": "__ENV_STREAM3_KEYS__"
+  }
+]
