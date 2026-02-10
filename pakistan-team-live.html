@@ -2304,17 +2304,25 @@
                 return;
             }
             
-            const isM3u8 = /\.m3u8(\?|$)/i.test(manifestUri) || manifestUri.indexOf('m3u8') !== -1;
+            // 4th match (index 3) always uses HLS.js; first 3 are MPD+keys (Shaka). Also if manifest.type === 'hls' or URL is m3u8.
+            const streamIndex = streams.indexOf(stream);
+            const explicitHls = stream.manifest && stream.manifest.type === 'hls';
+            const isHlsStream = explicitHls || (streamIndex === 3) || /\.m3u8(\?|$)/i.test(manifestUri) || manifestUri.indexOf('m3u8') !== -1;
             
             currentStream = stream.id;
             currentMatchTitle.textContent = stream.title;
             currentTournament.textContent = stream.tournament;
             
             try {
-                console.log('Loading stream:', stream.title, isM3u8 ? '(HLS/m3u8)' : '(DASH/MPD)');
+                console.log('Loading stream:', stream.title, isHlsStream ? '(HLS – 4th / m3u8)' : '(DASH/MPD)');
                 
-                if (isM3u8) {
-                    // --- HLS/m3u8: use HLS.js (or native on Safari), same approach as m3u8-player.net ---
+                if (isHlsStream) {
+                    // Skip if URL was not substituted (e.g. missing STREAM4_M3U8 in .env)
+                    if (manifestUri.indexOf('__ENV_') !== -1) {
+                        console.error('HLS stream URL not set. Add STREAM4_M3U8 to .env and run build.');
+                        return;
+                    }
+                    // --- 4th stream only: use HLS.js (same player as m3u8-player.net) ---
                     if (player) {
                         try {
                             await player.unload();
@@ -2328,22 +2336,26 @@
                         hlsInstance.destroy();
                         hlsInstance = null;
                     }
+                    video.src = '';
+                    video.removeAttribute('src');
+                    video.load();
                     video.removeAttribute('controls');
                     video.controls = true;
-                    video.src = '';
-                    video.load();
                     
-                    if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                        video.src = manifestUri;
-                        currentPlayerMode = 'hls';
-                        console.log('Stream loaded (native HLS):', stream.title);
-                        return;
-                    }
+                    // Prefer HLS.js when supported (so 4th stream behaves like m3u8-player.net). Use native only on Safari if HLS.js not available.
                     if (window.Hls && Hls.isSupported()) {
-                        hlsInstance = new Hls({ enableWorker: true });
+                        hlsInstance = new Hls({
+                            enableWorker: true,
+                            lowLatencyMode: false
+                        });
                         hlsInstance.attachMedia(video);
                         hlsInstance.on(Hls.Events.ERROR, function (event, data) {
-                            if (data.fatal) console.error('HLS error:', data);
+                            if (data.fatal) {
+                                console.error('HLS fatal error:', data.type, data.details, data);
+                            }
+                        });
+                        hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
+                            console.log('HLS manifest parsed:', stream.title);
                         });
                         hlsInstance.loadSource(manifestUri);
                         currentPlayerMode = 'hls';
@@ -2352,6 +2364,12 @@
                         if (isMobileDevice()) {
                             setTimeout(function () { ensureControlsVisible(); }, 500);
                         }
+                        return;
+                    }
+                    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = manifestUri;
+                        currentPlayerMode = 'hls';
+                        console.log('Stream loaded (native HLS):', stream.title);
                         return;
                     }
                     console.error('HLS not supported in this browser');

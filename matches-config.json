@@ -51,7 +51,8 @@
     "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
     "flags": ["🏏"],
     "manifest": {
-      "uri": "__ENV_STREAM4_M3U8__"
+      "uri": "__ENV_STREAM4_M3U8__",
+      "type": "hls"
     },
     "keys": ""
   }
