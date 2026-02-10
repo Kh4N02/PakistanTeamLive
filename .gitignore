@@ -1,0 +1,5 @@
+# Private match/stream config — do not commit; only the encoded HTML is pushed
+matches-config.json
+
+# Node (if you add other scripts later)
+node_modules/

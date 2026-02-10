@@ -1,0 +1,35 @@
+[
+  {
+    "title": "India vs United States",
+    "date": "7 Feb 2026",
+    "venue": "TBC",
+    "status": "live",
+    "tournament": "ICC Men's T20 World Cup 2026",
+    "description": "Watch India take on United States live on Prime.",
+    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
+    "flags": ["🇮🇳", "🇺🇸"],
+    "manifest": null
+  },
+  {
+    "title": "Pakistan vs Sri Lanka",
+    "date": "8 Feb 2026",
+    "venue": "TBC",
+    "status": "live",
+    "tournament": "ICC Men's T20 World Cup 2026",
+    "description": "Watch Pakistan take on Sri Lanka live on Prime.",
+    "image": "https://images.unsplash.com/photo-1617196034796-73b2d2b8a0d9?w=800",
+    "flags": ["🇵🇰", "🇱🇰"],
+    "manifest": null
+  },
+  {
+    "title": "Sri Lanka vs Ireland",
+    "date": "9 Feb 2026",
+    "venue": "TBC",
+    "status": "live",
+    "tournament": "ICC Men's T20 World Cup 2026",
+    "description": "Watch Sri Lanka take on Ireland live on Prime.",
+    "image": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800",
+    "flags": ["🇱🇰", "🇮🇪"],
+    "manifest": null
+  }
+]
