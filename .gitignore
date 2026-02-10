@@ -1,6 +1,3 @@
-# Private match/stream config — do not commit; only the encoded HTML is pushed
-matches-config.json
-
 # Secrets (MPD URLs, auth headers, keys) — never commit
 .env
 .env.local
