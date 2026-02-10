@@ -123,7 +123,13 @@ GitHub Pages will redeploy. The link (e.g. `https://yourusername.github.io/t20li
 
 ---
 
+## Local testing (before you push)
+
+Opening `pakistan-team-live.html` by **double-click** (file://) usually **fails** for streams: CORS and secure-context rules block the MPD request. Use a local web server: run `npx serve .` in the project folder, then open **http://localhost:3000/pakistan-team-live.html**. If it plays there, it will work the same on GitHub Pages after you push.
+
+---
+
 ## Security note (MPD/keys)
 
 - Stream URLs and keys are **not** stored in plain text; they exist only inside the **encoded** payload in the HTML (and in your local `matches-config.json`, which is not pushed). They are not visible in a simple “View Page Source” or by searching the repo for “.mpd” or “keys”.
-- Anyone who can open the page in a browser can still recover the stream data with dev tools (e.g. `window._s`). For a private audience (e.g. your Telegram channels), this is a reasonable trade-off; for stronger protection you’d need a backend that serves keys only to authenticated users.
+- Anyone who can open the page in a browser can still recover the stream data with dev tools (e.g. `window._s`) no longer works—the script no longer exposes the list on `window`. For a private audience (e.g. your Telegram channels), this is a reasonable trade-off; for stronger protection you’d need a backend that serves keys only to authenticated users.

@@ -98,9 +98,25 @@ You should see: `Done. Encoded 3 match(es) into pakistan-team-live.html`
 
 ---
 
-## 6. Test locally
+## 6. Test locally (use a local web server)
 
-Open `pakistan-team-live.html` in your browser (double-click or drag into Chrome/Edge). Click the first match (Netherlands vs Namibia). The stream should load if the MPD and keys are correct.
+**Do not** double-click `pakistan-team-live.html` (that opens it as `file://`). The stream CDN and the browser often block `file://` (CORS / secure context). So local playback will fail when opened as a file.
+
+**Use a local web server** so the page is served over `http://localhost` (same behaviour as on GitHub Pages):
+
+1. In the project folder (`PakistanTeamLive`), run:
+   ```bash
+   npx serve .
+   ```
+   (If you don’t have Node, install it first. First run may ask to install `serve` — type `y`.)
+
+2. Open in the browser: **http://localhost:3000/pakistan-team-live.html** (or the port shown in the terminal).
+
+3. Click the first match (Netherlands vs Namibia). The stream should load if the MPD and keys are correct.
+
+**Alternative:** In VS Code, install the “Live Server” extension, right‑click `pakistan-team-live.html` → “Open with Live Server”. Then test from the URL it opens (e.g. `http://127.0.0.1:5500/...`).
+
+Once it works on `http://localhost`, it will behave the same after you push and open the GitHub Pages URL.
 
 ---
 
@@ -133,7 +149,7 @@ git push
 | 3 | Put MPD URL in `STREAM1_MPD` and keys JSON in `STREAM1_KEYS` in `.env` |
 | 4 | Copy `matches-config.example.json` → `matches-config.json` |
 | 5 | Run `node build.js` |
-| 6 | Open `pakistan-team-live.html` in browser and test |
+| 6 | Run `npx serve .` and open http://localhost:3000/pakistan-team-live.html to test |
 | 7 | `git add` only the files listed above, then `git commit` and `git push` |
 
 ---

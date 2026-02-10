@@ -93,9 +93,9 @@ function main() {
 
   let html = fs.readFileSync(HTML_PATH, 'utf8');
 
-  // Replace the payload inside (function(){var _='...';try{window._s=...
-  const startMarker = "(function(){var _='";
-  const endMarker = "';try{window._s=JSON.parse(atob(_.split('').reverse().join('')));}catch(e){window._s=[];}";
+  // Replace the payload (streams never exposed on window to reduce console/extension sniffing)
+  const startMarker = "const streams = (function(){var _='";
+  const endMarker = "';try{return JSON.parse(atob(_.split('').reverse().join('')));}catch(e){return [];}})();";
   const startIdx = html.indexOf(startMarker);
   const endIdx = html.indexOf(endMarker);
   if (startIdx === -1 || endIdx === -1 || endIdx <= startIdx) {
