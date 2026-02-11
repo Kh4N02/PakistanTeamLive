@@ -42,18 +42,17 @@
     "keys": "__ENV_STREAM3_KEYS__"
   },
   {
-    "title": "ICC T20 WC 2026 (Urdu)",
+    "title": "Sky Sports Cricket HD",
     "date": "Live",
-    "venue": "HLS Stream",
+    "venue": "",
     "status": "live",
-    "tournament": "ICC Men's T20 World Cup 2026",
-    "description": "Watch in Urdu.",
-    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
+    "tournament": "HLS Stream",
+    "description": "Sky Sports Cricket HD (m3u8).",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Sky-sports-main-cricket.jpg",
     "flags": ["🏏"],
     "manifest": {
-      "uri": "__ENV_STREAM4_M3U8__",
-      "type": "hls"
+      "uri": "https://live.vpnhosted.com/Sky_sports_cricket_HD/index.m3u8?token=5d4b5bf07d959f3c2d83ba82b413d5d3"
     },
-    "keys": ""
+    "type": "hls"
   }
 ]

@@ -40,5 +40,19 @@
       "uri": "__ENV_STREAM3_MPD__"
     },
     "keys": "__ENV_STREAM3_KEYS__"
+  },
+  {
+    "title": "Sky Sports Cricket HD",
+    "date": "Live",
+    "venue": "",
+    "status": "live",
+    "tournament": "HLS Stream",
+    "description": "Optional 4th stream (m3u8). Use full URL or __ENV_STREAM4_HLS__.",
+    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
+    "flags": ["🏏"],
+    "manifest": {
+      "uri": "https://example.com/stream.m3u8"
+    },
+    "type": "hls"
   }
 ]
