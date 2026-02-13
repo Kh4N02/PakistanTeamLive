@@ -1256,6 +1256,7 @@
         let player = null;
         let ui = null;
         let hlsInstance = null;
+        let hlsLiveEdgeCleanup = null;
         let currentStream = null;
         let currentRequestHeaders = {};
         let playerInitialized = false;
@@ -2327,11 +2328,19 @@
                 if (useHls) {
                     if (player) await player.unload();
                     if (hlsInstance) {
+                        if (typeof hlsLiveEdgeCleanup === 'function') {
+                            hlsLiveEdgeCleanup();
+                            hlsLiveEdgeCleanup = null;
+                        }
                         hlsInstance.destroy();
                         hlsInstance = null;
                     }
                     if (typeof Hls !== 'undefined' && Hls.isSupported()) {
-                        hlsInstance = new Hls({ enableWorker: true });
+                        hlsInstance = new Hls({
+                            enableWorker: true,
+                            liveSyncDurationCount: 3,
+                            liveMaxLatencyLength: 10
+                        });
                         hlsInstance.loadSource(manifestUri);
                         hlsInstance.attachMedia(video);
                         hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
@@ -2340,6 +2349,32 @@
                         hlsInstance.on(Hls.Events.ERROR, function(event, data) {
                             if (data.fatal) console.error('HLS error:', data.type, data.details);
                         });
+                        var seekedToLiveOnce = false;
+                        function seekToLiveEdge() {
+                            if (seekedToLiveOnce) return;
+                            try {
+                                if (video.seekable.length > 0) {
+                                    var end = video.seekable.end(video.seekable.length - 1);
+                                    if (isFinite(end) && end > 0) {
+                                        video.currentTime = end;
+                                        seekedToLiveOnce = true;
+                                        console.log('HLS: seeked to live edge');
+                                        if (hlsLiveEdgeCleanup) {
+                                            hlsLiveEdgeCleanup();
+                                            hlsLiveEdgeCleanup = null;
+                                        }
+                                    }
+                                }
+                            } catch (e) {}
+                        }
+                        video.addEventListener('progress', seekToLiveEdge);
+                        video.addEventListener('loadedmetadata', seekToLiveEdge);
+                        hlsLiveEdgeCleanup = function() {
+                            video.removeEventListener('progress', seekToLiveEdge);
+                            video.removeEventListener('loadedmetadata', seekToLiveEdge);
+                        };
+                        setTimeout(seekToLiveEdge, 300);
+                        setTimeout(seekToLiveEdge, 1200);
                     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                         video.src = manifestUri;
                         console.log('HLS (native) stream loaded:', stream.title);
@@ -2350,6 +2385,10 @@
                     if (controlsContainer) controlsContainer.style.display = 'none';
                 } else {
                     if (hlsInstance) {
+                        if (typeof hlsLiveEdgeCleanup === 'function') {
+                            hlsLiveEdgeCleanup();
+                            hlsLiveEdgeCleanup = null;
+                        }
                         hlsInstance.destroy();
                         hlsInstance = null;
                     }
