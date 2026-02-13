@@ -54,19 +54,5 @@
       "uri": "https://live.vpnhosted.com/Sky_sports_cricket_HD/index.m3u8?token=5d4b5bf07d959f3c2d83ba82b413d5d3"
     },
     "type": "hls"
-  },
-  {
-    "title": "GEO SUPER 50 FPS",
-    "date": "Live",
-    "venue": "",
-    "status": "live",
-    "tournament": "HLS Stream",
-    "description": "GEO SUPER 50 FPS (m3u8).",
-    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
-    "flags": ["🏏"],
-    "manifest": {
-      "uri": "https://aps12.playlist.ttvnw.net/v1/playlist/CvAGe3tTTrNJ-g8sGUp_3zYGUj6UvvxaLDn1ydvMXBFI0wgsC4L2nDyVcKeKmPF6dOOQfs_Z47VUcK8AQFxhViPQPfNfCUkDAsvvItTCz8Tu_2xdI4BHCwS2IEQ76RAQRQ-id4zCrqaJCs-lPvNA85UTnkAEQeA-EsOPtD4NpY4i1d0F7QYSLJYIWnDEEiWd9Tjv9FNvvHPjidQeJtZJ8cq_0LqFOnN0LI2l9zLacS1rBBxuCwRVRFgGnmYm8RZ-SYq0JNjIVenbtEtMuGbwq1GRoACF7Ix10i8JZWMqiyZEq9-hxlIpfDx5rud4MWAXgnU9wqz2GH90LrUZgTYLO4mCtp4WQyUQ8SvexzU2cn-KNkCEbbPb82cA0zWekX5qRmW2A64HLyEiYfpTiJYCd78U8JileSUkb4YoawhEw1-EmGFBCB3gOj5qzK8ijkC7oPRVyXW7mNQaMG_GMuZaeoQKLZ1tz0HMWj0klct_QI5reRRjvT3c6anRS01PVOZAk-bXSSoeG1yT-9T3P5lUWqy8o2ULGP7E6BaUwuvqBqT2IbiCPvVIvGFj160OF1UXbeD--ZfS8px7_w83QcuQj-ApJpzMnsEJ4-D3oEh_pIxVAlPOJTC7yyVkF4E-vf2QS0lIxJUv9bQrYMN7HgD64VbMcyz6hLq3reKIYPTLEDMMsy44489I--RKRYU4Ku4lAfn30wrIMWx8RZ0_r_Xdg6iFPf6Ru6bpATYi8EmW8aoMe_aIIOJTWjH8QPYcL1HdnH5dB2X6WHJOjAdIbfTVBjdvxdEB5IocVrZijkPVQy384P6bu7KGofgkFaSTasxPAr2HQXzPDp93BSEIULTPBxfLfFQcuv7jAWM8zaxIjqg1fMgcHY500NDlyVMVYJd-o6i-wJoKNMHQzABI4fgesGpejFOOTif788dn_ieKfw4CSemjkOnYvrQHqnhaGQ8iU_bcLYdnSwINNlD54Qrjz7LabOAVaZLqi_5WqblbtSVso9PdJX2zXQFTPhsCZIgI6a5DDwzfPFAAEvUw2MlU6x4Ihf_MZ5asrOxm6g1lpYbXOJgd_j8HnY4SDiGLteXGWpV4AbUHSfMBZ6zmZXFv2kdGO7T_f6Am1RanjH398I7gP1AuQ4Q8LYoUKnTCUCOoYZfX98HsQtWAPhLaI_ajo7IqwxoMPIudEbwDmkKRxOrtIAEqCWV1LXdlc3QtMjC2Dg.m3u8"
-    },
-    "type": "hls"
   }
 ]
