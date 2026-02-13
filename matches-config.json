@@ -1,41 +1,41 @@
 [
   {
-    "title": "South Africa vs Afghanistan",
-    "date": "11 Feb 2026, 10:30 PKT",
-    "venue": "Narendra Modi Stadium, Ahmedabad",
-    "status": "live",
+    "title": "Zimbabwe vs. Australia",
+    "date": "13 Feb 2026, 10:30 PKT",
+    "venue": "R. Premadasa Stadium, Colombo",
+    "status": "",
     "tournament": "ICC Men's T20 World Cup 2026",
     "description": "Watch Netherlands take on Namibia live on Prime.",
-    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.c0b91acb-dfcb-47e5-885b-b1db8ab3867d/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX624_FMpng_.png",
-    "flags": ["🇿🇦", "🇫🇮"],
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.ae8a2d43-b6fc-486b-aa9c-3b244858f727/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_SX374_FMwebp_.png",
+    "flags": ["🇿🇼", "🇦🇺"],
     "manifest": {
       "uri": "__ENV_STREAM1_MPD__"
     },
     "keys": "__ENV_STREAM1_KEYS__"
   },
   {
-    "title": "Australia vs Ireland",
-    "date": "11 Feb 2026, 14:30 PKT",
-    "venue": "R. Premadasa Stadium, Colombo",
-    "status": "",
+    "title": "Canada vs. UAE",
+    "date": "13 Feb 2026, 14:30 PKT",
+    "venue": "Arun Jaitley Stadium, Delhi",
+    "status": "live",
     "tournament": "ICC Men's T20 World Cup 2026",
     "description": "Watch New Zealand take on UAE live on Prime.",
-    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.73b24a8d-2110-48de-b5c1-1c59e7fccb32/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX624_FMpng_.png",
-    "flags": ["🇦🇺", "🇮🇪"],
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.90829c3b-9f07-42ab-90ce-968a241438da/8/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX325_FMwebp_.png",
+    "flags": ["🇨🇦", "🇦🇪"],
     "manifest": {
       "uri": "__ENV_STREAM2_MPD__"
     },
     "keys": "__ENV_STREAM2_KEYS__"
   },
   {
-    "title": "England vs West Indies",
-    "date": "11 Feb 2026, 18:30 PKT",
-    "venue": "Wankhede Stadium, Mumbai",
+    "title": "USA vs. Netherlands",
+    "date": "13 Feb 2026, 18:30 PKT",
+    "venue": "MA Chidambaram Stadium, Chennai",
     "status": "",
     "tournament": "ICC Men's T20 World Cup 2026",
     "description": "Watch Pakistan take on USA live on Prime.",
-    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.b2fa44ec-ae6f-4cb3-8540-1a3b8cdf4ca7/5/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX624_FMpng_.png",
-    "flags": ["🇬🇧", "🇻🇪"],
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.dfbf3e4b-a21c-46f3-a408-9e21413d478c/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX325_FMwebp_.png",
+    "flags": ["🇺🇸", "🇳🇱"],
     "manifest": {
       "uri": "__ENV_STREAM3_MPD__"
     },
@@ -52,6 +52,20 @@
     "flags": ["🏏"],
     "manifest": {
       "uri": "https://live.vpnhosted.com/Sky_sports_cricket_HD/index.m3u8?token=5d4b5bf07d959f3c2d83ba82b413d5d3"
+    },
+    "type": "hls"
+  },
+  {
+    "title": "GEO SUPER 50 FPS",
+    "date": "Live",
+    "venue": "",
+    "status": "live",
+    "tournament": "HLS Stream",
+    "description": "GEO SUPER 50 FPS (m3u8).",
+    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
+    "flags": ["🏏"],
+    "manifest": {
+      "uri": "__ENV_STREAM5_M3U8__"
     },
     "type": "hls"
   }
