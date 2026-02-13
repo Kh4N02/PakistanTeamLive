@@ -1,20 +1,39 @@
 /**
  * Vercel serverless proxy for HLS (m3u8 + segments).
  * Avoids CORS issues when the player runs on Vercel but the stream is on another origin (e.g. ttvnw.net).
- * GET /api/proxy?url=<encoded-full-url>
+ * GET /api/proxy?url=<encoded-url>  or  POST /api/proxy with JSON body { "url": "<url>" }
+ * POST is used for very long URLs to avoid query string length limits.
  */
 
+function getTargetUrl(req) {
+  if (req.method === 'POST') {
+    let body = req.body;
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        return null;
+      }
+    }
+    return body && typeof body.url === 'string' ? body.url : null;
+  }
+  return req.query.url && typeof req.query.url === 'string' ? req.query.url : null;
+}
+
 module.exports = async function handler(req, res) {
-  if (req.method !== 'GET') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  if (req.method === 'OPTIONS') {
+    res.status(204).end();
+    return;
+  }
+  if (req.method !== 'GET' && req.method !== 'POST') {
     res.status(405).end();
     return;
   }
 
-  const targetUrl = req.query.url;
-  if (!targetUrl || typeof targetUrl !== 'string') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.status(400).json({ error: 'Missing url query parameter' });
+  const targetUrl = getTargetUrl(req);
+  if (!targetUrl) {
+    res.status(400).json({ error: 'Missing url (query param for GET or body.url for POST)' });
     return;
   }
 
