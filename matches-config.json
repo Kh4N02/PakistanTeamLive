@@ -1,5 +1,6 @@
 [
   {
+    "id": "live1",
     "title": "West Indies vs. Italy",
     "date": "19 Feb 2026, 10:30 PKT",
     "venue": "Eden Gardens, Kolkata",
@@ -14,6 +15,7 @@
     "keys": "__ENV_STREAM1_KEYS__"
   },
   {
+    "id": "live2",
     "title": "Sri Lanka vs. Zimbabwe",
     "date": "19 Feb 2026, 14:30 PKT",
     "venue": "R. Premadasa Stadium, Colombo",
@@ -28,6 +30,7 @@
     "keys": "__ENV_STREAM2_KEYS__"
   },
   {
+    "id": "live3",
     "title": "Afghanistan vs. Canada",
     "date": "15 Feb 2026, 18:30 PKT",
     "venue": "MA Chidambaram Stadium, Chennai",
@@ -42,6 +45,7 @@
     "keys": "__ENV_STREAM3_KEYS__"
   },
   {
+    "id": "live4",
     "title": "Astro SuperSport Cricket",
     "date": "",
     "venue": "",
@@ -56,6 +60,7 @@
     "type": "hls"
   },
   {
+    "id": "live5",
     "title": "PTV Sports 50 FPS - (PAKISTAN ONLY)",
     "date": "",
     "venue": "",
@@ -70,6 +75,7 @@
     "type": "hls"
   },
   {
+    "id": "live6",
     "title": "TAMASHA PRO URDU - (PAKISTAN ONLY)",
     "date": "",
     "venue": "",
