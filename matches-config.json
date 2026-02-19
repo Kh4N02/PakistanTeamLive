@@ -1,57 +1,85 @@
 [
   {
-    "title": "Zimbabwe vs. Australia",
-    "date": "13 Feb 2026, 10:30 PKT",
-    "venue": "R. Premadasa Stadium, Colombo",
-    "status": "",
+    "title": "West Indies vs. Italy",
+    "date": "19 Feb 2026, 10:30 PKT",
+    "venue": "Eden Gardens, Kolkata",
+    "status": "live",
     "tournament": "ICC Men's T20 World Cup 2026",
-    "description": "Watch Netherlands take on Namibia live on Prime.",
-    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.ae8a2d43-b6fc-486b-aa9c-3b244858f727/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_SX374_FMwebp_.png",
-    "flags": ["🇿🇼", "🇦🇺"],
+    "description": "Watch West Indies take on Italy!",
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.0014e66a-ec2c-498c-8ed5-c9cb6af8a890/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX374_FMwebp_.png",
+    "flags": ["🇮🇪", "🇴🇲"],
     "manifest": {
       "uri": "__ENV_STREAM1_MPD__"
     },
     "keys": "__ENV_STREAM1_KEYS__"
   },
   {
-    "title": "Canada vs. UAE",
-    "date": "13 Feb 2026, 14:30 PKT",
-    "venue": "Arun Jaitley Stadium, Delhi",
+    "title": "Sri Lanka vs. Zimbabwe",
+    "date": "19 Feb 2026, 14:30 PKT",
+    "venue": "R. Premadasa Stadium, Colombo",
     "status": "",
     "tournament": "ICC Men's T20 World Cup 2026",
-    "description": "Watch New Zealand take on UAE live on Prime.",
-    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.90829c3b-9f07-42ab-90ce-968a241438da/8/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX325_FMwebp_.png",
-    "flags": ["🇨🇦", "🇦🇪"],
+    "description": "Watch Sri Lanka take on Zimbabwe live!",
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.d4f1ca7f-5455-4282-947e-3cb2fbcacf98/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX374_FMwebp_.png",
+    "flags": ["🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🏴󠁧󠁢󠁳󠁣󠁴󠁿"],
     "manifest": {
       "uri": "__ENV_STREAM2_MPD__"
     },
     "keys": "__ENV_STREAM2_KEYS__"
   },
   {
-    "title": "USA vs. Netherlands",
-    "date": "13 Feb 2026, 18:30 PKT",
+    "title": "Afghanistan vs. Canada",
+    "date": "15 Feb 2026, 18:30 PKT",
     "venue": "MA Chidambaram Stadium, Chennai",
-    "status": "live",
+    "status": "",
     "tournament": "ICC Men's T20 World Cup 2026",
-    "description": "Watch Pakistan take on USA live on Prime.",
-    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.dfbf3e4b-a21c-46f3-a408-9e21413d478c/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX325_FMwebp_.png",
-    "flags": ["🇺🇸", "🇳🇱"],
+    "description": "Watch Pakistan take on USA live!",
+    "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.7f3621c1-57e9-47db-ac18-181e0f8eb6c8/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX374_FMwebp_.png",
+    "flags": ["🇳🇿", "🇿🇦"],
     "manifest": {
       "uri": "__ENV_STREAM3_MPD__"
     },
     "keys": "__ENV_STREAM3_KEYS__"
   },
   {
-    "title": "Sky Sports Cricket HD",
-    "date": "Live",
+    "title": "Astro SuperSport Cricket",
+    "date": "",
     "venue": "",
     "status": "live",
     "tournament": "HLS Stream",
-    "description": "Sky Sports Cricket HD (m3u8).",
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXdGemWeUZ9TIaH5iJgeytpiVooUaoYrHVVQ&s",
+    "description": "Astro SuperSport Cricket FHD (m3u8).",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Astro_Cricket.png?20240831235843",
     "flags": ["🏏"],
     "manifest": {
-      "uri": "https://live.vpnhosted.com/Sky_sports_cricket_HD/index.m3u8?token=5d4b5bf07d959f3c2d83ba82b413d5d3"
+      "uri": "__ENV_STREAM4_M3U8__"
+    },
+    "type": "hls"
+  },
+  {
+    "title": "PTV Sports 50 FPS - (PAKISTAN ONLY)",
+    "date": "",
+    "venue": "",
+    "status": "live",
+    "tournament": "HLS Stream",
+    "description": "480+720p",
+    "image": "https://upload.wikimedia.org/wikipedia/en/e/e4/PTV_Sports.png",
+    "flags": ["🏏"],
+    "manifest": {
+      "uri": "__ENV_STREAM5_M3U8__"
+    },
+    "type": "hls"
+  },
+  {
+    "title": "TAMASHA PRO URDU - (PAKISTAN ONLY)",
+    "date": "",
+    "venue": "",
+    "status": "live",
+    "tournament": "HLS Stream",
+    "description": "",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlkqVgnwASbUsksJMkyJRtPp_R1basnNY1XA&s",
+    "flags": ["🏏"],
+    "manifest": {
+      "uri": "__ENV_STREAM6_M3U8__"
     },
     "type": "hls"
   }
