@@ -54,19 +54,5 @@
       "uri": "https://example.com/stream.m3u8"
     },
     "type": "hls"
-  },
-  {
-    "title": "GEO SUPER 50 FPS",
-    "date": "Live",
-    "venue": "",
-    "status": "live",
-    "tournament": "HLS Stream",
-    "description": "GEO SUPER 50 FPS (m3u8). Use __ENV_STREAM5_M3U8__.",
-    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
-    "flags": ["🏏"],
-    "manifest": {
-      "uri": "https://example.com/stream5.m3u8"
-    },
-    "type": "hls"
   }
 ]
