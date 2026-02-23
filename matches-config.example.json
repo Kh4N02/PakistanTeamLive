@@ -1,5 +1,6 @@
 {
   "maxVisibleStreams": 2,
+  "visibleStreamIds": ["live1", "live2", "live3", "live4"],
   "streams": [
     {
       "id": "live1",
