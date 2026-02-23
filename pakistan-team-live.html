@@ -680,7 +680,7 @@
             display: none !important;
         }
 
-      /* Shaka Player Controls - Keep Original Layout */
+      /* Shaka Player Controls - Modern layout (aligned with inline_script_9.js), site colors */
         .shaka-video-container {
             width: 100% !important;
             height: 100% !important;
@@ -690,7 +690,7 @@
           justify-content: center !important;
       }
 
-      /* Ensure controls container is visible and properly positioned */
+      /* Modern control bar: glass effect, rounded top corners */
       .shaka-controls-container {
             position: absolute !important;
             bottom: 0 !important;
@@ -702,13 +702,28 @@
           opacity: 1 !important;
           visibility: visible !important;
           pointer-events: auto !important;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4)) !important;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-top: 1px solid var(--border);
+          padding: 8px 12px 10px !important;
+          border-radius: 16px 16px 0 0;
+          gap: 4px;
       }
 
-      /* Make all control buttons touchable */
+      /* Make all control buttons touchable and accent hover */
       .shaka-controls-button {
           touch-action: manipulation !important;
-          -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3) !important;
+          -webkit-tap-highlight-color: transparent !important;
           cursor: pointer !important;
+          color: rgba(255, 255, 255, 0.9) !important;
+          border-radius: 8px !important;
+          transition: color 0.2s, background 0.2s !important;
+      }
+      .shaka-controls-button:hover,
+      .shaka-controls-button[aria-pressed="true"] {
+          color: var(--accent) !important;
+          background: rgba(255, 255, 255, 0.08) !important;
       }
 
       /* Custom Quality Selector Styles */
@@ -747,7 +762,7 @@
 
       .custom-quality-menu-item span {
           margin-left: 8px;
-          color: #00a8e1;
+          color: var(--accent);
           font-weight: bold;
       }
 
@@ -799,11 +814,17 @@
           }
       }
 
-      /* Ensure progress bar is touchable */
+      /* Ensure progress and volume bars use site accent (modern look) */
       .shaka-seek-bar-container,
       .shaka-volume-bar-container {
           touch-action: pan-x !important;
-        }
+      }
+      .shaka-range-container {
+          --shaka-fill: var(--accent);
+      }
+      .shaka-range-container input[type="range"] {
+          accent-color: var(--accent);
+      }
 
         @media (max-width: 768px) {
             .landing-header {
@@ -950,7 +971,7 @@
               height: 14px !important;
               -webkit-appearance: none !important;
               appearance: none !important;
-              background: #fff !important;
+              background: var(--accent) !important;
               border-radius: 50% !important;
               cursor: pointer !important;
               margin-top: -5.5px !important;
@@ -959,7 +980,7 @@
           .shaka-range-container input[type="range"]::-moz-range-thumb {
               width: 14px !important;
               height: 14px !important;
-              background: #fff !important;
+              background: var(--accent) !important;
               border-radius: 50% !important;
               cursor: pointer !important;
               border: none !important;
@@ -2089,12 +2110,30 @@
                     }
                 });
 
-          // Create UI with default Shaka controls (original layout)
+          // Create UI with modern layout and site accent colors (like inline_script_9.js)
           ui = new shaka.ui.Overlay(player, videoContainer, video);
-          // PiP is in overflow menu by default (YouTube-style: overflow ⋮ → Picture-in-Picture)
-          if (ui.configure && document.pictureInPictureEnabled) {
-            ui.configure({ overflowMenuButtons: ['quality', 'language', 'playback_rate', 'picture_in_picture'] });
-          }
+          (function applyShakaUiConfig() {
+            var accent = (getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#2dd4bf').trim();
+            var uiConfig = {
+              controlPanelElements: [
+                'play_pause', 'mute', 'volume', 'time_and_duration', 'spacer', 'picture_in_picture', 'overflow_menu', 'fullscreen'
+              ],
+              addSeekBar: true,
+              seekBarColors: {
+                base: 'rgba(255, 255, 255, 0.3)',
+                buffered: 'rgba(255, 255, 255, 0.5)',
+                played: accent.indexOf('rgba') === 0 ? accent : (accent + 'e6')
+              },
+              volumeBarColors: {
+                base: 'rgba(255, 255, 255, 0.3)',
+                level: accent.indexOf('rgba') === 0 ? accent : (accent + 'e6')
+              }
+            };
+            if (document.pictureInPictureEnabled && ui.configure) {
+              uiConfig.overflowMenuButtons = ['quality', 'language', 'playback_rate', 'picture_in_picture'];
+            }
+            if (ui.configure) ui.configure(uiConfig);
+          })();
           
           // Error handling
           player.addEventListener('error', (event) => {
