@@ -82,8 +82,9 @@ function main() {
     process.exit(1);
   }
 
-  if (!Array.isArray(data)) {
-    console.error('matches-config.json must be a JSON array of match objects.');
+  const isArray = Array.isArray(data);
+  if (!isArray && (!data.streams || !Array.isArray(data.streams))) {
+    console.error('matches-config.json must be a JSON array of match objects, or an object with "streams" array (and optional "maxVisibleStreams" number).');
     process.exit(1);
   }
 
@@ -93,13 +94,12 @@ function main() {
 
   let html = fs.readFileSync(HTML_PATH, 'utf8');
 
-  // Replace the payload (streams never exposed on window to reduce console/extension sniffing)
-  const startMarker = "const streams = (function(){var _='";
-  const endMarker = "';try{return JSON.parse(atob(_.split('').reverse().join('')));}catch(e){return [];}})();";
+  const startMarker = "const _payload = (function(){var _='";
+  const endMarker = "';try{return JSON.parse(atob(_.split('').reverse().join('')));}catch(e){return {};}})();";
   const startIdx = html.indexOf(startMarker);
   const endIdx = html.indexOf(endMarker);
   if (startIdx === -1 || endIdx === -1 || endIdx <= startIdx) {
-    console.error('Could not find payload placeholder in pakistan-team-live.html');
+    console.error('Could not find payload placeholder in pakistan-team-live.html (expected _payload IIFE with endMarker).');
     process.exit(1);
   }
   const before = html.slice(0, startIdx + startMarker.length);
@@ -107,7 +107,8 @@ function main() {
   html = before + encoded + after;
 
   fs.writeFileSync(HTML_PATH, html, 'utf8');
-  console.log('Done. Encoded', data.length, 'match(es) into pakistan-team-live.html');
+  const streamCount = isArray ? data.length : data.streams.length;
+  console.log('Done. Encoded', streamCount, 'match(es) into pakistan-team-live.html.');
 }
 
 main();

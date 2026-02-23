@@ -1,58 +1,45 @@
-[
-  {
-    "title": "Netherlands vs Namibia",
-    "date": "10 Feb 2026, 10:30 PKT",
-    "venue": "TBC",
-    "status": "live",
-    "tournament": "ICC Men's T20 World Cup 2026",
-    "description": "Watch Netherlands take on Namibia live on Prime.",
-    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
-    "flags": ["🇳🇱", "🇳🇦"],
-    "manifest": {
-      "uri": "__ENV_STREAM1_MPD__"
+{
+  "maxVisibleStreams": 2,
+  "streams": [
+    {
+      "id": "live1",
+      "title": "Netherlands vs Namibia",
+      "date": "10 Feb 2026, 10:30 PKT",
+      "status": "live",
+      "tournament": "ICC Men's T20 World Cup 2026",
+      "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
+      "manifest": { "uri": "__ENV_STREAM1_MPD__" },
+      "keys": "__ENV_STREAM1_KEYS__"
     },
-    "keys": "__ENV_STREAM1_KEYS__"
-  },
-  {
-    "title": "New Zealand vs UAE",
-    "date": "10 Feb 2026, 14:30 PKT",
-    "venue": "TBC",
-    "status": "live",
-    "tournament": "ICC Men's T20 World Cup 2026",
-    "description": "Watch New Zealand take on UAE live on Prime.",
-    "image": "https://images.unsplash.com/photo-1617196034796-73b2d2b8a0d9?w=800",
-    "flags": ["🇳🇿", "🇦🇪"],
-    "manifest": {
-      "uri": "__ENV_STREAM2_MPD__"
+    {
+      "id": "live2",
+      "title": "New Zealand vs UAE",
+      "date": "10 Feb 2026, 14:30 PKT",
+      "status": "live",
+      "tournament": "ICC Men's T20 World Cup 2026",
+      "image": "https://images.unsplash.com/photo-1617196034796-73b2d2b8a0d9?w=800",
+      "manifest": { "uri": "__ENV_STREAM2_MPD__" },
+      "keys": "__ENV_STREAM2_KEYS__"
     },
-    "keys": "__ENV_STREAM2_KEYS__"
-  },
-  {
-    "title": "Pakistan vs USA",
-    "date": "10 Feb 2026, 18:30 PKT",
-    "venue": "TBC",
-    "status": "live",
-    "tournament": "ICC Men's T20 World Cup 2026",
-    "description": "Watch Pakistan take on USA live on Prime.",
-    "image": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800",
-    "flags": ["🇵🇰", "🇺🇸"],
-    "manifest": {
-      "uri": "__ENV_STREAM3_MPD__"
+    {
+      "id": "live3",
+      "title": "Pakistan vs USA",
+      "date": "10 Feb 2026, 18:30 PKT",
+      "status": "live",
+      "tournament": "ICC Men's T20 World Cup 2026",
+      "image": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800",
+      "manifest": { "uri": "__ENV_STREAM3_MPD__" },
+      "keys": "__ENV_STREAM3_KEYS__"
     },
-    "keys": "__ENV_STREAM3_KEYS__"
-  },
-  {
-    "title": "Sky Sports Cricket HD",
-    "date": "Live",
-    "venue": "",
-    "status": "live",
-    "tournament": "HLS Stream",
-    "description": "Optional 4th stream (m3u8). Use full URL or __ENV_STREAM4_HLS__.",
-    "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
-    "flags": ["🏏"],
-    "manifest": {
-      "uri": "https://example.com/stream.m3u8"
-    },
-    "type": "hls"
-  }
-]
+    {
+      "id": "live4",
+      "title": "Sky Sports Cricket HD",
+      "date": "Live",
+      "status": "live",
+      "tournament": "HLS Stream",
+      "image": "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800",
+      "manifest": { "uri": "https://example.com/stream.m3u8" },
+      "type": "hls"
+    }
+  ]
+}
