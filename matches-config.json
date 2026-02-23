@@ -1,6 +1,6 @@
 {
   "maxVisibleStreams": 1,
-  "visibleStreamIds": ["live1", "live2", "live3"],
+  "visibleStreamIds": ["live1"],
   "featuredImageSrcset": "https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX720_FMwebp_.jpeg 720w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX1080_FMwebp_.jpeg 1080w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX1440_FMwebp_.jpeg 1440w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX2160_FMwebp_.jpeg 2160w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX2880_FMwebp_.jpeg 2880w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX3840_FMwebp_.jpeg 3840w",
   "featuredImageSizes": "(max-width: 28em) 448px, (max-width: 55em) 880px, (max-width: 80em) 1300px, (max-width: 100em) 1650px, (max-width: 150em) 2260px, 2260px",
   "streams": [
@@ -22,8 +22,7 @@
       "tournament": "ICC Men's T20 World Cup 2026",
       "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.d4f1ca7f-5455-4282-947e-3cb2fbcacf98/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX374_FMwebp_.png",
       "manifest": { "uri": "__ENV_STREAM2_MPD__" },
-      "keys": "__ENV_STREAM2_KEYS__",
-      "player": "dplayer"
+      "keys": "__ENV_STREAM2_KEYS__"
     },
     {
       "id": "live3",
@@ -33,8 +32,7 @@
       "tournament": "ICC Men's T20 World Cup 2026",
       "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.7f3621c1-57e9-47db-ac18-181e0f8eb6c8/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX374_FMwebp_.png",
       "manifest": { "uri": "__ENV_STREAM3_MPD__" },
-      "keys": "__ENV_STREAM3_KEYS__",
-      "player": "plyr_hls"
+      "keys": "__ENV_STREAM3_KEYS__"
     },
     {
       "id": "live4",
