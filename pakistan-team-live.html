@@ -1335,10 +1335,6 @@
         let currentRequestHeaders = {};
         let playerInitialized = false;
 
-        function getRoutePath() { var p = (typeof location !== 'undefined' && location.pathname) ? location.pathname.replace(/\/$/, '') || '/' : '/'; return p; }
-        function homeUrl() { return (typeof location !== 'undefined' && location.origin) ? location.origin + '/' : ''; }
-        function primeUrl() { return (typeof location !== 'undefined' && location.origin) ? location.origin + '/prime' : ''; }
-
         const landingPage = document.getElementById('landingPage');
         const playerPage = document.getElementById('playerPage');
         const watchLiveBtn = document.getElementById('watchLiveBtn');
@@ -1355,6 +1351,11 @@
         
         const TG_LINK = 'https://t.me/PakistanTeam';
         let pendingStreamAfterTg = null;
+
+        function getAppHomeUrl() { return (typeof location !== 'undefined' && location.origin) ? location.origin + '/' : ''; }
+        function getPrimeUrl() { return (typeof location !== 'undefined' && location.origin) ? location.origin + '/prime' : ''; }
+        function isPrimePath() { return typeof location !== 'undefined' && location.pathname === '/prime'; }
+        function isAppHomePath() { var p = typeof location !== 'undefined' ? location.pathname : ''; return p === '' || p === '/'; }
 
         (function initTheme() {
             var theme = localStorage.getItem('theme') || 'dark';
@@ -2006,7 +2007,7 @@
             playerPage.classList.remove('active');
             document.body.style.overflow = '';
             if (window.history && window.history.replaceState) {
-                window.history.replaceState({ page: 'home' }, '', homeUrl());
+                window.history.replaceState({ page: 'home' }, '', getAppHomeUrl());
             }
             if (player && playerInitialized) {
                 try {
@@ -2018,16 +2019,13 @@
             currentStream = null;
         }
 
-        async function showPlayerPage(optionalStream, skipPushState) {
+        async function showPlayerPage(stream) {
             landingPage.classList.add('hidden');
             playerPage.classList.add('active');
             document.body.style.overflow = 'hidden';
-            if (!skipPushState && window.history && window.history.pushState) {
-                if (optionalStream && optionalStream.id === 'live1') {
-                    window.history.pushState({ page: 'player', streamId: 'live1' }, '', primeUrl());
-                } else {
-                    window.history.pushState({ page: 'player' }, '', window.location.href);
-                }
+            if (window.history && window.history.pushState) {
+                var url = (stream && stream.id === 'live1') ? getPrimeUrl() : window.location.href;
+                window.history.pushState({ page: 'player', streamId: stream ? stream.id : null }, '', url);
             }
             
         // Force mobile video attributes
@@ -2735,35 +2733,48 @@
 
         homeBtnHeader.addEventListener('click', () => {
             if (window.history && window.history.pushState) {
-                window.history.pushState({ page: 'home' }, '', homeUrl());
+                window.history.pushState({ page: 'home' }, '', getAppHomeUrl());
             }
             showLandingPage();
         });
 
-        (function applyInitialRoute() {
-            var path = getRoutePath();
-            if (path === '/prime') {
+        function applyRouteFromPath() {
+            if (isPrimePath()) {
                 var live1Stream = streams.find(function(s) { return s.id === 'live1'; });
                 if (live1Stream) {
-                    showPlayerPage(null, true).then(function() { loadStream(live1Stream); });
-                    return;
-                }
-            }
-            if (path.indexOf('pakistan-team-live') !== -1 && window.history && window.history.replaceState) {
-                window.history.replaceState({ page: 'home' }, '', homeUrl());
-            }
-        })();
-        window.addEventListener('popstate', function() {
-            var path = getRoutePath();
-            if (path === '/' || path === '') {
-                showLandingPage();
-            } else if (path === '/prime') {
-                var live1Stream = streams.find(function(s) { return s.id === 'live1'; });
-                if (live1Stream) {
-                    showPlayerPage().then(function() { loadStream(live1Stream); });
+                    landingPage.classList.add('hidden');
+                    playerPage.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    if (!playerInitialized) {
+                        initPlayer().then(function() {
+                            return new Promise(function(r) { setTimeout(r, 300); });
+                        }).then(function() { loadStream(live1Stream); });
+                    } else {
+                        loadStream(live1Stream);
+                    }
                 }
             } else {
-                showLandingPage();
+                landingPage.classList.remove('hidden');
+                playerPage.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (window.history && window.history.replaceState) {
+            if (isPrimePath()) {
+                window.history.replaceState({ page: 'player', streamId: 'live1' }, '', getPrimeUrl());
+                applyRouteFromPath();
+            } else {
+                window.history.replaceState({ page: 'home' }, '', getAppHomeUrl());
+            }
+        }
+        window.addEventListener('popstate', function(e) {
+            if (isPrimePath()) {
+                applyRouteFromPath();
+            } else {
+                if (playerPage && playerPage.classList.contains('active')) {
+                    showLandingPage();
+                }
             }
         });
 
@@ -2772,7 +2783,7 @@
         if (shareBtn) {
             shareBtn.addEventListener('click', async () => {
                 try {
-                    const homepageUrl = homeUrl();
+                    const homepageUrl = getAppHomeUrl();
                     
                     // Try to use Clipboard API
                     if (navigator.clipboard && navigator.clipboard.writeText) {
