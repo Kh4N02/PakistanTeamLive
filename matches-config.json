@@ -1,5 +1,4 @@
 {
-  "basePath": "/streams",
   "maxVisibleStreams": 1,
   "visibleStreamIds": ["live1"],
   "featuredImageSrcset": "https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX720_FMwebp_.jpeg 720w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX1080_FMwebp_.jpeg 1080w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX1440_FMwebp_.jpeg 1440w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX2160_FMwebp_.jpeg 2160w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX2880_FMwebp_.jpeg 2880w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_WestIndiesvsZimbabwe_Feb23/4eae8018-d2be-460e-92bb-76b77ce7446a._UR3840,1440_SX3840_FMwebp_.jpeg 3840w",
@@ -7,7 +6,6 @@
   "streams": [
     {
       "id": "live1",
-      "slug": "prime",
       "title": "Zimbabwe vs. West Indies",
       "date": "23 Feb 2026, 10:30 PKT",
       "status": "live",
