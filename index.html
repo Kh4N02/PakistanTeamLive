@@ -199,16 +199,13 @@
             width: 100%;
             height: 100%;
             max-height: 320px;
-            object-fit: contain;
+            object-fit: cover;
             object-position: center;
             vertical-align: middle;
             display: block;
         }
         html[data-theme="light"] .featured-content {
             background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255, 255, 255, 0.95) 100%);
-        }
-        html[data-theme="light"] .event-card.has-image {
-            background-color: rgba(241, 245, 249, 0.85);
         }
         .match-title {
             font-size: clamp(18px, 2.5vw, 22px);
@@ -348,11 +345,10 @@
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.98) 100%);
         }
         .event-card.has-image {
-            background-size: contain;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             min-height: 200px;
-            background-color: rgba(15, 23, 42, 0.6);
         }
         .event-card.has-image::before {
             content: '';
