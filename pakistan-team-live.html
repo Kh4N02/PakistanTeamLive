@@ -189,22 +189,22 @@
             border-radius: 16px 16px 0 0;
             overflow: hidden;
             background: var(--bg-card);
-            aspect-ratio: 16 / 9;
             position: relative;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 */
         }
         .featured-picture:not([data-loaded]) { display: none; }
         .featured-section:not(.has-featured-image) .featured-content { border-radius: 16px; }
         .featured-section.has-featured-image .featured-content { border-radius: 0 0 16px 16px; }
         .featured-img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center;
-            vertical-align: middle;
             display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
         }
         html[data-theme="light"] .featured-content {
             background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255, 255, 255, 0.95) 100%);
