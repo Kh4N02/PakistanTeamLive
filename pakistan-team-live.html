@@ -1357,11 +1357,6 @@
         const TG_LINK = 'https://t.me/PakistanTeam';
         let pendingStreamAfterTg = null;
 
-        function getAppHomeUrl() { return (typeof location !== 'undefined' && location.origin) ? location.origin + '/' : ''; }
-        function getPrimeUrl() { return (typeof location !== 'undefined' && location.origin) ? location.origin + '/prime' : ''; }
-        function isPrimePath() { return typeof location !== 'undefined' && location.pathname === '/prime'; }
-        function isAppHomePath() { var p = typeof location !== 'undefined' ? location.pathname : ''; return p === '' || p === '/'; }
-
         (function initTheme() {
             var theme = localStorage.getItem('theme') || 'dark';
             document.documentElement.setAttribute('data-theme', theme);
@@ -1399,7 +1394,7 @@
             if (pendingStreamAfterTg) {
                 const s = pendingStreamAfterTg;
                 pendingStreamAfterTg = null;
-                showPlayerPage(s).then(() => loadStream(s));
+                showPlayerPage().then(() => loadStream(s));
             }
         }
         
@@ -2011,9 +2006,6 @@
             landingPage.classList.remove('hidden');
             playerPage.classList.remove('active');
             document.body.style.overflow = '';
-            if (window.history && window.history.replaceState) {
-                window.history.replaceState({ page: 'home' }, '', getAppHomeUrl());
-            }
             if (player && playerInitialized) {
                 try {
                     player.unload();
@@ -2024,13 +2016,12 @@
             currentStream = null;
         }
 
-        async function showPlayerPage(stream) {
+        async function showPlayerPage() {
             landingPage.classList.add('hidden');
             playerPage.classList.add('active');
             document.body.style.overflow = 'hidden';
             if (window.history && window.history.pushState) {
-                var url = (stream && stream.id === 'live1') ? getPrimeUrl() : window.location.href;
-                window.history.pushState({ page: 'player', streamId: stream ? stream.id : null }, '', url);
+                window.history.pushState({ page: 'player' }, '', window.location.href);
             }
             
         // Force mobile video attributes
@@ -2737,49 +2728,19 @@
         });
 
         homeBtnHeader.addEventListener('click', () => {
-            if (window.history && window.history.pushState) {
-                window.history.pushState({ page: 'home' }, '', getAppHomeUrl());
+            if (window.history && window.history.length > 1) {
+                window.history.back();
+            } else {
+                showLandingPage();
             }
-            showLandingPage();
         });
 
-        function applyRouteFromPath() {
-            if (isPrimePath()) {
-                var live1Stream = streams.find(function(s) { return s.id === 'live1'; });
-                if (live1Stream) {
-                    landingPage.classList.add('hidden');
-                    playerPage.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    if (!playerInitialized) {
-                        initPlayer().then(function() {
-                            return new Promise(function(r) { setTimeout(r, 300); });
-                        }).then(function() { loadStream(live1Stream); });
-                    } else {
-                        loadStream(live1Stream);
-                    }
-                }
-            } else {
-                landingPage.classList.remove('hidden');
-                playerPage.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
         if (window.history && window.history.replaceState) {
-            if (isPrimePath()) {
-                window.history.replaceState({ page: 'player', streamId: 'live1' }, '', getPrimeUrl());
-                applyRouteFromPath();
-            } else {
-                window.history.replaceState({ page: 'home' }, '', getAppHomeUrl());
-            }
+            window.history.replaceState({ page: 'home' }, '', window.location.href);
         }
-        window.addEventListener('popstate', function(e) {
-            if (isPrimePath()) {
-                applyRouteFromPath();
-            } else {
-                if (playerPage && playerPage.classList.contains('active')) {
-                    showLandingPage();
-                }
+        window.addEventListener('popstate', function() {
+            if (playerPage && playerPage.classList.contains('active')) {
+                showLandingPage();
             }
         });
 
@@ -2788,7 +2749,7 @@
         if (shareBtn) {
             shareBtn.addEventListener('click', async () => {
                 try {
-                    const homepageUrl = getAppHomeUrl();
+                    const homepageUrl = window.location.origin + window.location.pathname;
                     
                     // Try to use Clipboard API
                     if (navigator.clipboard && navigator.clipboard.writeText) {

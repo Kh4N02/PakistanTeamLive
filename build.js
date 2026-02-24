@@ -107,10 +107,8 @@ function main() {
   html = before + encoded + after;
 
   fs.writeFileSync(HTML_PATH, html, 'utf8');
-  const indexPath = path.join(__dirname, 'index.html');
-  fs.writeFileSync(indexPath, html, 'utf8');
   const streamCount = isArray ? data.length : data.streams.length;
-  console.log('Done. Encoded', streamCount, 'match(es) into pakistan-team-live.html and index.html.');
+  console.log('Done. Encoded', streamCount, 'match(es) into pakistan-team-live.html.');
 }
 
 main();
