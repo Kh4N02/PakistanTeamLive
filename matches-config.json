@@ -1,26 +1,26 @@
 {
   "maxVisibleStreams": 1,
-  "visibleStreamIds": ["live1"],
+  "visibleStreamIds": ["live1","live2"],
   "featuredImageSrcset": "https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_PakistanvsEngland_Feb24/285c0831-c3a4-4f3d-a229-fc8e5a67a3aa._UR3840,1440_SX720_FMwebp_.jpeg 720w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_PakistanvsEngland_Feb24/285c0831-c3a4-4f3d-a229-fc8e5a67a3aa._UR3840,1440_SX1080_FMwebp_.jpeg 1080w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_PakistanvsEngland_Feb24/285c0831-c3a4-4f3d-a229-fc8e5a67a3aa._UR3840,1440_SX1440_FMwebp_.jpeg 1440w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_PakistanvsEngland_Feb24/285c0831-c3a4-4f3d-a229-fc8e5a67a3aa._UR3840,1440_SX2160_FMwebp_.jpeg 2160w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_PakistanvsEngland_Feb24/285c0831-c3a4-4f3d-a229-fc8e5a67a3aa._UR3840,1440_SX2880_FMwebp_.jpeg 2880w, https://m.media-amazon.com/images/S/sonata-images-prod/LiveEvent_ROW_AU_ICC_PakistanvsEngland_Feb24/285c0831-c3a4-4f3d-a229-fc8e5a67a3aa._UR3840,1440_SX3840_FMwebp_.jpeg 3840w",
   "featuredImageSizes": "(max-width: 28em) 448px, (max-width: 55em) 880px, (max-width: 80em) 1300px, (max-width: 100em) 1650px, (max-width: 150em) 2260px, 2260px",
   "streams": [
     {
       "id": "live1",
-      "title": "Pakistan vs. England",
-      "date": "24 Feb 2026, 10:30 PKT",
+      "title": "West Indies vs. South Africa",
+      "date": "26 Feb 2026, 10:30 PKT",
       "status": "live",
       "tournament": "ICC Men's T20 World Cup 2026",
-      "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.6014222a-2d60-4d57-98cd-d424e528feea/12/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX624_FMwebp_.png",
+      "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.8b0f8ff9-b590-4cf7-9682-9b329e319bde/13/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX325_FMwebp_.png",
       "manifest": { "uri": "__ENV_STREAM1_MPD__" },
       "keys": "__ENV_STREAM1_KEYS__"
     },
     {
       "id": "live2",
-      "title": "Sri Lanka vs. Zimbabwe",
-      "date": "19 Feb 2026, 14:30 PKT",
+      "title": "India vs. Zimbabwe",
+      "date": "26 Feb 2026, 14:30 PKT",
       "status": "",
       "tournament": "ICC Men's T20 World Cup 2026",
-      "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.d4f1ca7f-5455-4282-947e-3cb2fbcacf98/6/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX374_FMwebp_.png",
+      "image": "https://images-fe.ssl-images-amazon.com/images/S/le-target-images-prod/amzn1.dv.gti.6d2e2549-97af-4c0a-ac9a-7568a0b29121/16/BOXART-16X9/en-US/1920x1080._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/m-r/Prime/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kvf21cb47db8d34aa971cd86f57a65cf8d_SX325_FMwebp_.png",
       "manifest": { "uri": "__ENV_STREAM2_MPD__" },
       "keys": "__ENV_STREAM2_KEYS__"
     },
